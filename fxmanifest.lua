@@ -1,9 +1,13 @@
---- Maintained by TayMcKenzieNZ ---
---- Check for updates at https://github.com/TayMcKenzieNZ/rpemotes ---
+--- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
+--- Leakers and resellers are the absolute scum of the earth we all support support open source ---
+--- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
 
 fx_version 'cerulean'
 game 'gta5'
-version '1.1.7'
+
+description 'RP-EMOTES - Maintained by Jimathy and Tnoxious for the Community!'
+author 'Tnoxious Repo - Keeping the Project alive!'
+version '1.1.8'
 lua54 'yes'
 
 dependencies {
@@ -28,7 +32,6 @@ shared_scripts {
 server_scripts {
     'printer.lua',
     'server/Server.lua',
-    'server/Updates.lua',
     'server/frameworks/*.lua'
 }
 
@@ -52,47 +55,25 @@ client_scripts {
 ---- Loads all ytyp files for custom props to stream ---
 
 data_file 'DLC_ITYP_REQUEST' 'stream/taymckenzienz_rpemotes.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'badge1.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'copbadge.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'bzzz_foodpack'
-
 data_file 'DLC_ITYP_REQUEST' 'bzzz_prop_torch_fire001.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'natty_props_lollipops.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'apple_1.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_food_icecream_pack.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_food_dessert_a.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_give_gift.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/ultra_ringcase.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_food_xmas22.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/knjgh_pizzas.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/pata_christmasfood.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/pata_cake.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/pata_freevalentinesday.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_love_001.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_birthday_001.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_baby_001.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_casino001.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/brum_heart.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/brum_heartfrappe.ytyp'
-
 data_file 'DLC_ITYP_REQUEST' 'stream/kaykaymods_props.ytyp'

@@ -1,5 +1,11 @@
+--- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
+--- Leakers and resellers are the absolute scum of the earth we all support support open source ---
+--- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+
 function WalkMenuStart(name)
-    if Config.PersistentWalk then SetResourceKvp("walkstyle", name) end
+    if Config.PersistentWalk then
+        SetResourceKvp("walkstyle", name)
+    end
     RequestWalking(name)
     SetPedMovementClipset(PlayerPedId(), name, 0.2)
     RemoveAnimSet(name)
@@ -44,11 +50,14 @@ function tableHasKey(table, key)
 end
 
 if Config.WalkingStylesEnabled and Config.PersistentWalk then
-    AddEventHandler('playerSpawned', function()
-        local kvp = GetResourceKvpString("walkstyle")
+    AddEventHandler(
+        "playerSpawned",
+        function()
+            local kvp = GetResourceKvpString("walkstyle")
 
-        if kvp ~= nil then
-            WalkMenuStart(kvp)
+            if kvp ~= nil then
+                WalkMenuStart(kvp)
+            end
         end
-    end)
+    )
 end

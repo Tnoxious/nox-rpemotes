@@ -1,92 +1,344 @@
+--- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
+--- Leakers and resellers are the absolute scum of the earth we all support support open source ---
+--- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+
 UIResRectangle = setmetatable({}, UIResRectangle)
 UIResRectangle.__index = UIResRectangle
-UIResRectangle.__call = function() return "Rectangle" end
+UIResRectangle.__call = function()
+    return "Rectangle"
+end
 
 UIResText = setmetatable({}, UIResText)
 UIResText.__index = UIResText
-UIResText.__call = function() return "Text" end
+UIResText.__call = function()
+    return "Text"
+end
 
 Sprite = setmetatable({}, Sprite)
 Sprite.__index = Sprite
-Sprite.__call = function() return "Sprite" end
+Sprite.__call = function()
+    return "Sprite"
+end
 
 UIMenuItem = setmetatable({}, UIMenuItem)
 UIMenuItem.__index = UIMenuItem
-UIMenuItem.__call = function() return "UIMenuItem", "UIMenuItem" end
+UIMenuItem.__call = function()
+    return "UIMenuItem", "UIMenuItem"
+end
 
 UIMenuCheckboxItem = setmetatable({}, UIMenuCheckboxItem)
 UIMenuCheckboxItem.__index = UIMenuCheckboxItem
-UIMenuCheckboxItem.__call = function() return "UIMenuItem", "UIMenuCheckboxItem" end
+UIMenuCheckboxItem.__call = function()
+    return "UIMenuItem", "UIMenuCheckboxItem"
+end
 
 UIMenuListItem = setmetatable({}, UIMenuListItem)
 UIMenuListItem.__index = UIMenuListItem
-UIMenuListItem.__call = function() return "UIMenuItem", "UIMenuListItem" end
+UIMenuListItem.__call = function()
+    return "UIMenuItem", "UIMenuListItem"
+end
 
 UIMenuSliderItem = setmetatable({}, UIMenuSliderItem)
 UIMenuSliderItem.__index = UIMenuSliderItem
-UIMenuSliderItem.__call = function() return "UIMenuItem", "UIMenuSliderItem" end
+UIMenuSliderItem.__call = function()
+    return "UIMenuItem", "UIMenuSliderItem"
+end
 
 UIMenuColouredItem = setmetatable({}, UIMenuColouredItem)
 UIMenuColouredItem.__index = UIMenuColouredItem
-UIMenuColouredItem.__call = function() return "UIMenuItem", "UIMenuColouredItem" end
+UIMenuColouredItem.__call = function()
+    return "UIMenuItem", "UIMenuColouredItem"
+end
 
 UIMenuProgressItem = setmetatable({}, UIMenuProgressItem)
 UIMenuProgressItem.__index = UIMenuProgressItem
-UIMenuProgressItem.__call = function() return "UIMenuItem", "UIMenuProgressItem" end
+UIMenuProgressItem.__call = function()
+    return "UIMenuItem", "UIMenuProgressItem"
+end
 
 UIMenuHeritageWindow = setmetatable({}, UIMenuHeritageWindow)
 UIMenuHeritageWindow.__index = UIMenuHeritageWindow
-UIMenuHeritageWindow.__call = function() return "UIMenuWindow", "UIMenuHeritageWindow" end
+UIMenuHeritageWindow.__call = function()
+    return "UIMenuWindow", "UIMenuHeritageWindow"
+end
 
 UIMenuGridPanel = setmetatable({}, UIMenuGridPanel)
 UIMenuGridPanel.__index = UIMenuGridPanel
-UIMenuGridPanel.__call = function() return "UIMenuPanel", "UIMenuGridPanel" end
+UIMenuGridPanel.__call = function()
+    return "UIMenuPanel", "UIMenuGridPanel"
+end
 
 UIMenuColourPanel = setmetatable({}, UIMenuColourPanel)
 UIMenuColourPanel.__index = UIMenuColourPanel
-UIMenuColourPanel.__call = function() return "UIMenuPanel", "UIMenuColourPanel" end
+UIMenuColourPanel.__call = function()
+    return "UIMenuPanel", "UIMenuColourPanel"
+end
 
 UIMenuPercentagePanel = setmetatable({}, UIMenuPercentagePanel)
 UIMenuPercentagePanel.__index = UIMenuPercentagePanel
-UIMenuPercentagePanel.__call = function() return "UIMenuPanel", "UIMenuPercentagePanel" end
+UIMenuPercentagePanel.__call = function()
+    return "UIMenuPanel", "UIMenuPercentagePanel"
+end
 
 UIMenu = setmetatable({}, UIMenu)
 UIMenu.__index = UIMenu
-UIMenu.__call = function() return "UIMenu" end
+UIMenu.__call = function()
+    return "UIMenu"
+end
 
 MenuPool = setmetatable({}, MenuPool)
 MenuPool.__index = MenuPool
 
 NativeUI = {}
 
-CharacterMap = { [' '] = 6, ['!'] = 6, ['"'] = 6, ['#'] = 11, ['$'] = 10, ['%'] = 17, ['&'] = 13, ['\\'] = 4, ['('] = 6, [')'] = 6, ['*'] = 7, ['+'] = 10, [','] = 4, ['-'] = 6, ['.'] = 4, ['/'] = 7, ['0'] = 12, ['1'] = 7, ['2'] = 11, ['3'] = 11, ['4'] = 11, ['5'] = 11, ['6'] = 12, ['7'] = 10, ['8'] = 11, ['9'] = 11, [':'] = 5, [';'] = 4, ['<'] = 9, ['='] = 9, ['>'] = 9, ['?'] = 10, ['@'] = 15, ['A'] = 12, ['B'] = 13, ['C'] = 14, ['D'] = 14, ['E'] = 12, ['F'] = 12, ['G'] = 15, ['H'] = 14, ['I'] = 5, ['J'] = 11, ['K'] = 13, ['L'] = 11, ['M'] = 16, ['N'] = 14, ['O'] = 16, ['P'] = 12, ['Q'] = 15, ['R'] = 13, ['S'] = 12, ['T'] = 11, ['U'] = 13, ['V'] = 12, ['W'] = 18, ['X'] = 11, ['Y'] = 11, ['Z'] = 12, ['['] = 6, [']'] = 6, ['^'] = 9, ['_'] = 18, ['`'] = 8, ['a'] = 11, ['b'] = 12, ['c'] = 11, ['d'] = 12, ['e'] = 12, ['f'] = 5, ['g'] = 13, ['h'] = 11, ['i'] = 4, ['j'] = 4, ['k'] = 10, ['l'] = 4, ['m'] = 18, ['n'] = 11, ['o'] = 12, ['p'] = 12, ['q'] = 12, ['r'] = 7, ['s'] = 9, ['t'] = 5, ['u'] = 11, ['v'] = 10, ['w'] = 14, ['x'] = 9, ['y'] = 10, ['z'] = 9, ['{'] = 6, ['|'] = 3, ['}'] = 6 }
+CharacterMap = {
+    [" "] = 6,
+    ["!"] = 6,
+    ['"'] = 6,
+    ["#"] = 11,
+    ["$"] = 10,
+    ["%"] = 17,
+    ["&"] = 13,
+    ["\\"] = 4,
+    ["("] = 6,
+    [")"] = 6,
+    ["*"] = 7,
+    ["+"] = 10,
+    [","] = 4,
+    ["-"] = 6,
+    ["."] = 4,
+    ["/"] = 7,
+    ["0"] = 12,
+    ["1"] = 7,
+    ["2"] = 11,
+    ["3"] = 11,
+    ["4"] = 11,
+    ["5"] = 11,
+    ["6"] = 12,
+    ["7"] = 10,
+    ["8"] = 11,
+    ["9"] = 11,
+    [":"] = 5,
+    [";"] = 4,
+    ["<"] = 9,
+    ["="] = 9,
+    [">"] = 9,
+    ["?"] = 10,
+    ["@"] = 15,
+    ["A"] = 12,
+    ["B"] = 13,
+    ["C"] = 14,
+    ["D"] = 14,
+    ["E"] = 12,
+    ["F"] = 12,
+    ["G"] = 15,
+    ["H"] = 14,
+    ["I"] = 5,
+    ["J"] = 11,
+    ["K"] = 13,
+    ["L"] = 11,
+    ["M"] = 16,
+    ["N"] = 14,
+    ["O"] = 16,
+    ["P"] = 12,
+    ["Q"] = 15,
+    ["R"] = 13,
+    ["S"] = 12,
+    ["T"] = 11,
+    ["U"] = 13,
+    ["V"] = 12,
+    ["W"] = 18,
+    ["X"] = 11,
+    ["Y"] = 11,
+    ["Z"] = 12,
+    ["["] = 6,
+    ["]"] = 6,
+    ["^"] = 9,
+    ["_"] = 18,
+    ["`"] = 8,
+    ["a"] = 11,
+    ["b"] = 12,
+    ["c"] = 11,
+    ["d"] = 12,
+    ["e"] = 12,
+    ["f"] = 5,
+    ["g"] = 13,
+    ["h"] = 11,
+    ["i"] = 4,
+    ["j"] = 4,
+    ["k"] = 10,
+    ["l"] = 4,
+    ["m"] = 18,
+    ["n"] = 11,
+    ["o"] = 12,
+    ["p"] = 12,
+    ["q"] = 12,
+    ["r"] = 7,
+    ["s"] = 9,
+    ["t"] = 5,
+    ["u"] = 11,
+    ["v"] = 10,
+    ["w"] = 14,
+    ["x"] = 9,
+    ["y"] = 10,
+    ["z"] = 9,
+    ["{"] = 6,
+    ["|"] = 3,
+    ["}"] = 6
+}
 
-BadgeStyle = { None = 0, BronzeMedal = 1, GoldMedal = 2, SilverMedal = 3, Alert = 4, Crown = 5, Ammo = 6, Armour = 7, Barber = 8, Clothes = 9, Franklin = 10, Bike = 11, Car = 12, Gun = 13, Heart = 14, Makeup = 15, Mask = 16, Michael = 17, Star = 18, Tattoo = 19, Trevor = 20, Lock = 21, Tick = 22 }
+BadgeStyle = {
+    None = 0,
+    BronzeMedal = 1,
+    GoldMedal = 2,
+    SilverMedal = 3,
+    Alert = 4,
+    Crown = 5,
+    Ammo = 6,
+    Armour = 7,
+    Barber = 8,
+    Clothes = 9,
+    Franklin = 10,
+    Bike = 11,
+    Car = 12,
+    Gun = 13,
+    Heart = 14,
+    Makeup = 15,
+    Mask = 16,
+    Michael = 17,
+    Star = 18,
+    Tattoo = 19,
+    Trevor = 20,
+    Lock = 21,
+    Tick = 22
+}
 
 BadgeTexture = {
-    [0] = function() return "" end,
-    [1] = function() return "mp_medal_bronze" end,
-    [2] = function() return "mp_medal_gold" end,
-    [3] = function() return "medal_silver" end,
-    [4] = function() return "mp_alerttriangle" end,
-    [5] = function() return "mp_hostcrown" end,
-    [6] = function(Selected) if Selected then return "shop_ammo_icon_b" else return "shop_ammo_icon_a" end end,
-    [7] = function(Selected) if Selected then return "shop_armour_icon_b" else return "shop_armour_icon_a" end end,
-    [8] = function(Selected) if Selected then return "shop_barber_icon_b" else return "shop_barber_icon_a" end end,
-    [9] = function(Selected) if Selected then return "shop_clothing_icon_b" else return "shop_clothing_icon_a" end end,
-    [10] = function(Selected) if Selected then return "shop_franklin_icon_b" else return "shop_franklin_icon_a" end end,
-    [11] = function(Selected) if Selected then return "shop_garage_bike_icon_b" else return "shop_garage_bike_icon_a" end end,
-    [12] = function(Selected) if Selected then return "shop_garage_icon_b" else return "shop_garage_icon_a" end end,
-    [13] = function(Selected) if Selected then return "shop_gunclub_icon_b" else return "shop_gunclub_icon_a" end end,
-    [14] = function(Selected) if Selected then return "shop_health_icon_b" else return "shop_health_icon_a" end end,
-    [15] = function(Selected) if Selected then return "shop_makeup_icon_b" else return "shop_makeup_icon_a" end end,
-    [16] = function(Selected) if Selected then return "shop_mask_icon_b" else return "shop_mask_icon_a" end end,
-    [17] = function(Selected) if Selected then return "shop_michael_icon_b" else return "shop_michael_icon_a" end end,
-    [18] = function() return "shop_new_star" end,
-    [19] = function(Selected) if Selected then return "shop_tattoos_icon_b" else return "shop_tattoos_icon_a" end end,
-    [20] = function(Selected) if Selected then return "shop_trevor_icon_b" else return "shop_trevor_icon_a" end end,
-    [21] = function() return "shop_lock" end,
-    [22] = function() return "shop_tick_icon" end,
+    [0] = function()
+        return ""
+    end,
+    [1] = function()
+        return "mp_medal_bronze"
+    end,
+    [2] = function()
+        return "mp_medal_gold"
+    end,
+    [3] = function()
+        return "medal_silver"
+    end,
+    [4] = function()
+        return "mp_alerttriangle"
+    end,
+    [5] = function()
+        return "mp_hostcrown"
+    end,
+    [6] = function(Selected)
+        if Selected then
+            return "shop_ammo_icon_b"
+        else
+            return "shop_ammo_icon_a"
+        end
+    end,
+    [7] = function(Selected)
+        if Selected then
+            return "shop_armour_icon_b"
+        else
+            return "shop_armour_icon_a"
+        end
+    end,
+    [8] = function(Selected)
+        if Selected then
+            return "shop_barber_icon_b"
+        else
+            return "shop_barber_icon_a"
+        end
+    end,
+    [9] = function(Selected)
+        if Selected then
+            return "shop_clothing_icon_b"
+        else
+            return "shop_clothing_icon_a"
+        end
+    end,
+    [10] = function(Selected)
+        if Selected then
+            return "shop_franklin_icon_b"
+        else
+            return "shop_franklin_icon_a"
+        end
+    end,
+    [11] = function(Selected)
+        if Selected then
+            return "shop_garage_bike_icon_b"
+        else
+            return "shop_garage_bike_icon_a"
+        end
+    end,
+    [12] = function(Selected)
+        if Selected then
+            return "shop_garage_icon_b"
+        else
+            return "shop_garage_icon_a"
+        end
+    end,
+    [13] = function(Selected)
+        if Selected then
+            return "shop_gunclub_icon_b"
+        else
+            return "shop_gunclub_icon_a"
+        end
+    end,
+    [14] = function(Selected)
+        if Selected then
+            return "shop_health_icon_b"
+        else
+            return "shop_health_icon_a"
+        end
+    end,
+    [15] = function(Selected)
+        if Selected then
+            return "shop_makeup_icon_b"
+        else
+            return "shop_makeup_icon_a"
+        end
+    end,
+    [16] = function(Selected)
+        if Selected then
+            return "shop_mask_icon_b"
+        else
+            return "shop_mask_icon_a"
+        end
+    end,
+    [17] = function(Selected)
+        if Selected then
+            return "shop_michael_icon_b"
+        else
+            return "shop_michael_icon_a"
+        end
+    end,
+    [18] = function()
+        return "shop_new_star"
+    end,
+    [19] = function(Selected)
+        if Selected then
+            return "shop_tattoos_icon_b"
+        else
+            return "shop_tattoos_icon_a"
+        end
+    end,
+    [20] = function(Selected)
+        if Selected then
+            return "shop_trevor_icon_b"
+        else
+            return "shop_trevor_icon_a"
+        end
+    end,
+    [21] = function()
+        return "shop_lock"
+    end,
+    [22] = function()
+        return "shop_tick_icon"
+    end
 }
 
 BadgeDictionary = {
@@ -96,239 +348,256 @@ BadgeDictionary = {
         else
             return "commonmenu"
         end
-    end,
+    end
 }
 
 BadgeColour = {
-    [5] = function(Selected) if Selected then return 0, 0, 0, 255 else return 255, 255, 255, 255 end end,
-    [21] = function(Selected) if Selected then return 0, 0, 0, 255 else return 255, 255, 255, 255 end end,
-    [22] = function(Selected) if Selected then return 0, 0, 0, 255 else return 255, 255, 255, 255 end end,
+    [5] = function(Selected)
+        if Selected then
+            return 0, 0, 0, 255
+        else
+            return 255, 255, 255, 255
+        end
+    end,
+    [21] = function(Selected)
+        if Selected then
+            return 0, 0, 0, 255
+        else
+            return 255, 255, 255, 255
+        end
+    end,
+    [22] = function(Selected)
+        if Selected then
+            return 0, 0, 0, 255
+        else
+            return 255, 255, 255, 255
+        end
+    end
 }
 
 Colours = {
-    PureWhite = { 255, 255, 255, 255 },
-    White = { 240, 240, 240, 255 },
-    Black = { 0, 0, 0, 255 },
-    Grey = { 155, 155, 155, 255 },
-    GreyLight = { 205, 205, 205, 255 },
-    GreyDark = { 77, 77, 77, 255 },
-    Red = { 224, 50, 50, 255 },
-    RedLight = { 240, 153, 153, 255 },
-    RedDark = { 112, 25, 25, 255 },
-    Blue = { 93, 182, 229, 255 },
-    BlueLight = { 174, 219, 242, 255 },
-    BlueDark = { 47, 92, 115, 255 },
-    Yellow = { 240, 200, 80, 255 },
-    YellowLight = { 254, 235, 169, 255 },
-    YellowDark = { 126, 107, 41, 255 },
-    Orange = { 255, 133, 85, 255 },
-    OrangeLight = { 255, 194, 170, 255 },
-    OrangeDark = { 127, 66, 42, 255 },
-    Green = { 114, 204, 114, 255 },
-    GreenLight = { 185, 230, 185, 255 },
-    GreenDark = { 57, 102, 57, 255 },
-    Purple = { 132, 102, 226, 255 },
-    PurpleLight = { 192, 179, 239, 255 },
-    PurpleDark = { 67, 57, 111, 255 },
-    Pink = { 203, 54, 148, 255 },
-    RadarHealth = { 53, 154, 71, 255 },
-    RadarArmour = { 93, 182, 229, 255 },
-    RadarDamage = { 235, 36, 39, 255 },
-    NetPlayer1 = { 194, 80, 80, 255 },
-    NetPlayer2 = { 156, 110, 175, 255 },
-    NetPlayer3 = { 255, 123, 196, 255 },
-    NetPlayer4 = { 247, 159, 123, 255 },
-    NetPlayer5 = { 178, 144, 132, 255 },
-    NetPlayer6 = { 141, 206, 167, 255 },
-    NetPlayer7 = { 113, 169, 175, 255 },
-    NetPlayer8 = { 211, 209, 231, 255 },
-    NetPlayer9 = { 144, 127, 153, 255 },
-    NetPlayer10 = { 106, 196, 191, 255 },
-    NetPlayer11 = { 214, 196, 153, 255 },
-    NetPlayer12 = { 234, 142, 80, 255 },
-    NetPlayer13 = { 152, 203, 234, 255 },
-    NetPlayer14 = { 178, 98, 135, 255 },
-    NetPlayer15 = { 144, 142, 122, 255 },
-    NetPlayer16 = { 166, 117, 94, 255 },
-    NetPlayer17 = { 175, 168, 168, 255 },
-    NetPlayer18 = { 232, 142, 155, 255 },
-    NetPlayer19 = { 187, 214, 91, 255 },
-    NetPlayer20 = { 12, 123, 86, 255 },
-    NetPlayer21 = { 123, 196, 255, 255 },
-    NetPlayer22 = { 171, 60, 230, 255 },
-    NetPlayer23 = { 206, 169, 13, 255 },
-    NetPlayer24 = { 71, 99, 173, 255 },
-    NetPlayer25 = { 42, 166, 185, 255 },
-    NetPlayer26 = { 186, 157, 125, 255 },
-    NetPlayer27 = { 201, 225, 255, 255 },
-    NetPlayer28 = { 240, 240, 150, 255 },
-    NetPlayer29 = { 237, 140, 161, 255 },
-    NetPlayer30 = { 249, 138, 138, 255 },
-    NetPlayer31 = { 252, 239, 166, 255 },
-    NetPlayer32 = { 240, 240, 240, 255 },
-    SimpleBlipDefault = { 159, 201, 166, 255 },
-    MenuBlue = { 140, 140, 140, 255 },
-    MenuGreyLight = { 140, 140, 140, 255 },
-    MenuBlueExtraDark = { 40, 40, 40, 255 },
-    MenuYellow = { 240, 160, 0, 255 },
-    MenuYellowDark = { 240, 160, 0, 255 },
-    MenuGreen = { 240, 160, 0, 255 },
-    MenuGrey = { 140, 140, 140, 255 },
-    MenuGreyDark = { 60, 60, 60, 255 },
-    MenuHighlight = { 30, 30, 30, 255 },
-    MenuStandard = { 140, 140, 140, 255 },
-    MenuDimmed = { 75, 75, 75, 255 },
-    MenuExtraDimmed = { 50, 50, 50, 255 },
-    BriefTitle = { 95, 95, 95, 255 },
-    MidGreyMp = { 100, 100, 100, 255 },
-    NetPlayer1Dark = { 93, 39, 39, 255 },
-    NetPlayer2Dark = { 77, 55, 89, 255 },
-    NetPlayer3Dark = { 124, 62, 99, 255 },
-    NetPlayer4Dark = { 120, 80, 80, 255 },
-    NetPlayer5Dark = { 87, 72, 66, 255 },
-    NetPlayer6Dark = { 74, 103, 83, 255 },
-    NetPlayer7Dark = { 60, 85, 88, 255 },
-    NetPlayer8Dark = { 105, 105, 64, 255 },
-    NetPlayer9Dark = { 72, 63, 76, 255 },
-    NetPlayer10Dark = { 53, 98, 95, 255 },
-    NetPlayer11Dark = { 107, 98, 76, 255 },
-    NetPlayer12Dark = { 117, 71, 40, 255 },
-    NetPlayer13Dark = { 76, 101, 117, 255 },
-    NetPlayer14Dark = { 65, 35, 47, 255 },
-    NetPlayer15Dark = { 72, 71, 61, 255 },
-    NetPlayer16Dark = { 85, 58, 47, 255 },
-    NetPlayer17Dark = { 87, 84, 84, 255 },
-    NetPlayer18Dark = { 116, 71, 77, 255 },
-    NetPlayer19Dark = { 93, 107, 45, 255 },
-    NetPlayer20Dark = { 6, 61, 43, 255 },
-    NetPlayer21Dark = { 61, 98, 127, 255 },
-    NetPlayer22Dark = { 85, 30, 115, 255 },
-    NetPlayer23Dark = { 103, 84, 6, 255 },
-    NetPlayer24Dark = { 35, 49, 86, 255 },
-    NetPlayer25Dark = { 21, 83, 92, 255 },
-    NetPlayer26Dark = { 93, 98, 62, 255 },
-    NetPlayer27Dark = { 100, 112, 127, 255 },
-    NetPlayer28Dark = { 120, 120, 75, 255 },
-    NetPlayer29Dark = { 152, 76, 93, 255 },
-    NetPlayer30Dark = { 124, 69, 69, 255 },
-    NetPlayer31Dark = { 10, 43, 50, 255 },
-    NetPlayer32Dark = { 95, 95, 10, 255 },
-    Bronze = { 180, 130, 97, 255 },
-    Silver = { 150, 153, 161, 255 },
-    Gold = { 214, 181, 99, 255 },
-    Platinum = { 166, 221, 190, 255 },
-    Gang1 = { 29, 100, 153, 255 },
-    Gang2 = { 214, 116, 15, 255 },
-    Gang3 = { 135, 125, 142, 255 },
-    Gang4 = { 229, 119, 185, 255 },
-    SameCrew = { 252, 239, 166, 255 },
-    Freemode = { 45, 110, 185, 255 },
-    PauseBg = { 0, 0, 0, 255 },
-    Friendly = { 93, 182, 229, 255 },
-    Enemy = { 194, 80, 80, 255 },
-    Location = { 240, 200, 80, 255 },
-    Pickup = { 114, 204, 114, 255 },
-    PauseSingleplayer = { 114, 204, 114, 255 },
-    FreemodeDark = { 22, 55, 92, 255 },
-    InactiveMission = { 154, 154, 154, 255 },
-    Damage = { 194, 80, 80, 255 },
-    PinkLight = { 252, 115, 201, 255 },
-    PmMitemHighlight = { 252, 177, 49, 255 },
-    ScriptVariable = { 0, 0, 0, 255 },
-    Yoga = { 109, 247, 204, 255 },
-    Tennis = { 241, 101, 34, 255 },
-    Golf = { 214, 189, 97, 255 },
-    ShootingRange = { 112, 25, 25, 255 },
-    FlightSchool = { 47, 92, 115, 255 },
-    NorthBlue = { 93, 182, 229, 255 },
-    SocialClub = { 234, 153, 28, 255 },
-    PlatformBlue = { 11, 55, 123, 255 },
-    PlatformGreen = { 146, 200, 62, 255 },
-    PlatformGrey = { 234, 153, 28, 255 },
-    FacebookBlue = { 66, 89, 148, 255 },
-    IngameBg = { 0, 0, 0, 255 },
-    Darts = { 114, 204, 114, 255 },
-    Waypoint = { 164, 76, 242, 255 },
-    Michael = { 101, 180, 212, 255 },
-    Franklin = { 171, 237, 171, 255 },
-    Trevor = { 255, 163, 87, 255 },
-    GolfP1 = { 240, 240, 240, 255 },
-    GolfP2 = { 235, 239, 30, 255 },
-    GolfP3 = { 255, 149, 14, 255 },
-    GolfP4 = { 246, 60, 161, 255 },
-    WaypointLight = { 210, 166, 249, 255 },
-    WaypointDark = { 82, 38, 121, 255 },
-    PanelLight = { 0, 0, 0, 255 },
-    MichaelDark = { 72, 103, 116, 255 },
-    FranklinDark = { 85, 118, 85, 255 },
-    TrevorDark = { 127, 81, 43, 255 },
-    ObjectiveRoute = { 240, 200, 80, 255 },
-    PausemapTint = { 0, 0, 0, 255 },
-    PauseDeselect = { 100, 100, 100, 255 },
-    PmWeaponsPurchasable = { 45, 110, 185, 255 },
-    PmWeaponsLocked = { 240, 240, 240, 255 },
-    ScreenBg = { 0, 0, 0, 255 },
-    Chop = { 224, 50, 50, 255 },
-    PausemapTintHalf = { 0, 0, 0, 255 },
-    NorthBlueOfficial = { 0, 71, 133, 255 },
-    ScriptVariable2 = { 0, 0, 0, 255 },
-    H = { 33, 118, 37, 255 },
-    HDark = { 37, 102, 40, 255 },
-    T = { 234, 153, 28, 255 },
-    TDark = { 225, 140, 8, 255 },
-    HShard = { 20, 40, 0, 255 },
-    ControllerMichael = { 48, 255, 255, 255 },
-    ControllerFranklin = { 48, 255, 0, 255 },
-    ControllerTrevor = { 176, 80, 0, 255 },
-    ControllerChop = { 127, 0, 0, 255 },
-    VideoEditorVideo = { 53, 166, 224, 255 },
-    VideoEditorAudio = { 162, 79, 157, 255 },
-    VideoEditorText = { 104, 192, 141, 255 },
-    HbBlue = { 29, 100, 153, 255 },
-    HbYellow = { 234, 153, 28, 255 },
-    VideoEditorScore = { 240, 160, 1, 255 },
-    VideoEditorAudioFadeout = { 59, 34, 57, 255 },
-    VideoEditorTextFadeout = { 41, 68, 53, 255 },
-    VideoEditorScoreFadeout = { 82, 58, 10, 255 },
-    HeistBackground = { 37, 102, 40, 255 },
-    VideoEditorAmbient = { 240, 200, 80, 255 },
-    VideoEditorAmbientFadeout = { 80, 70, 34, 255 },
-    Gb = { 255, 133, 85, 255 },
-    G = { 255, 194, 170, 255 },
-    B = { 255, 133, 85, 255 },
-    LowFlow = { 240, 200, 80, 255 },
-    LowFlowDark = { 126, 107, 41, 255 },
-    G1 = { 247, 159, 123, 255 },
-    G2 = { 226, 134, 187, 255 },
-    G3 = { 239, 238, 151, 255 },
-    G4 = { 113, 169, 175, 255 },
-    G5 = { 160, 140, 193, 255 },
-    G6 = { 141, 206, 167, 255 },
-    G7 = { 181, 214, 234, 255 },
-    G8 = { 178, 144, 132, 255 },
-    G9 = { 0, 132, 114, 255 },
-    G10 = { 216, 85, 117, 255 },
-    G11 = { 30, 100, 152, 255 },
-    G12 = { 43, 181, 117, 255 },
-    G13 = { 233, 141, 79, 255 },
-    G14 = { 137, 210, 215, 255 },
-    G15 = { 134, 125, 141, 255 },
-    Adversary = { 109, 34, 33, 255 },
-    DegenRed = { 255, 0, 0, 255 },
-    DegenYellow = { 255, 255, 0, 255 },
-    DegenGreen = { 0, 255, 0, 255 },
-    DegenCyan = { 0, 255, 255, 255 },
-    DegenBlue = { 0, 0, 255, 255 },
-    DegenMagenta = { 255, 0, 255, 255 },
-    Stunt1 = { 38, 136, 234, 255 },
-    Stunt2 = { 224, 50, 50, 255 },
+    PureWhite = {255, 255, 255, 255},
+    White = {240, 240, 240, 255},
+    Black = {0, 0, 0, 255},
+    Grey = {155, 155, 155, 255},
+    GreyLight = {205, 205, 205, 255},
+    GreyDark = {77, 77, 77, 255},
+    Red = {224, 50, 50, 255},
+    RedLight = {240, 153, 153, 255},
+    RedDark = {112, 25, 25, 255},
+    Blue = {93, 182, 229, 255},
+    BlueLight = {174, 219, 242, 255},
+    BlueDark = {47, 92, 115, 255},
+    Yellow = {240, 200, 80, 255},
+    YellowLight = {254, 235, 169, 255},
+    YellowDark = {126, 107, 41, 255},
+    Orange = {255, 133, 85, 255},
+    OrangeLight = {255, 194, 170, 255},
+    OrangeDark = {127, 66, 42, 255},
+    Green = {114, 204, 114, 255},
+    GreenLight = {185, 230, 185, 255},
+    GreenDark = {57, 102, 57, 255},
+    Purple = {132, 102, 226, 255},
+    PurpleLight = {192, 179, 239, 255},
+    PurpleDark = {67, 57, 111, 255},
+    Pink = {203, 54, 148, 255},
+    RadarHealth = {53, 154, 71, 255},
+    RadarArmour = {93, 182, 229, 255},
+    RadarDamage = {235, 36, 39, 255},
+    NetPlayer1 = {194, 80, 80, 255},
+    NetPlayer2 = {156, 110, 175, 255},
+    NetPlayer3 = {255, 123, 196, 255},
+    NetPlayer4 = {247, 159, 123, 255},
+    NetPlayer5 = {178, 144, 132, 255},
+    NetPlayer6 = {141, 206, 167, 255},
+    NetPlayer7 = {113, 169, 175, 255},
+    NetPlayer8 = {211, 209, 231, 255},
+    NetPlayer9 = {144, 127, 153, 255},
+    NetPlayer10 = {106, 196, 191, 255},
+    NetPlayer11 = {214, 196, 153, 255},
+    NetPlayer12 = {234, 142, 80, 255},
+    NetPlayer13 = {152, 203, 234, 255},
+    NetPlayer14 = {178, 98, 135, 255},
+    NetPlayer15 = {144, 142, 122, 255},
+    NetPlayer16 = {166, 117, 94, 255},
+    NetPlayer17 = {175, 168, 168, 255},
+    NetPlayer18 = {232, 142, 155, 255},
+    NetPlayer19 = {187, 214, 91, 255},
+    NetPlayer20 = {12, 123, 86, 255},
+    NetPlayer21 = {123, 196, 255, 255},
+    NetPlayer22 = {171, 60, 230, 255},
+    NetPlayer23 = {206, 169, 13, 255},
+    NetPlayer24 = {71, 99, 173, 255},
+    NetPlayer25 = {42, 166, 185, 255},
+    NetPlayer26 = {186, 157, 125, 255},
+    NetPlayer27 = {201, 225, 255, 255},
+    NetPlayer28 = {240, 240, 150, 255},
+    NetPlayer29 = {237, 140, 161, 255},
+    NetPlayer30 = {249, 138, 138, 255},
+    NetPlayer31 = {252, 239, 166, 255},
+    NetPlayer32 = {240, 240, 240, 255},
+    SimpleBlipDefault = {159, 201, 166, 255},
+    MenuBlue = {140, 140, 140, 255},
+    MenuGreyLight = {140, 140, 140, 255},
+    MenuBlueExtraDark = {40, 40, 40, 255},
+    MenuYellow = {240, 160, 0, 255},
+    MenuYellowDark = {240, 160, 0, 255},
+    MenuGreen = {240, 160, 0, 255},
+    MenuGrey = {140, 140, 140, 255},
+    MenuGreyDark = {60, 60, 60, 255},
+    MenuHighlight = {30, 30, 30, 255},
+    MenuStandard = {140, 140, 140, 255},
+    MenuDimmed = {75, 75, 75, 255},
+    MenuExtraDimmed = {50, 50, 50, 255},
+    BriefTitle = {95, 95, 95, 255},
+    MidGreyMp = {100, 100, 100, 255},
+    NetPlayer1Dark = {93, 39, 39, 255},
+    NetPlayer2Dark = {77, 55, 89, 255},
+    NetPlayer3Dark = {124, 62, 99, 255},
+    NetPlayer4Dark = {120, 80, 80, 255},
+    NetPlayer5Dark = {87, 72, 66, 255},
+    NetPlayer6Dark = {74, 103, 83, 255},
+    NetPlayer7Dark = {60, 85, 88, 255},
+    NetPlayer8Dark = {105, 105, 64, 255},
+    NetPlayer9Dark = {72, 63, 76, 255},
+    NetPlayer10Dark = {53, 98, 95, 255},
+    NetPlayer11Dark = {107, 98, 76, 255},
+    NetPlayer12Dark = {117, 71, 40, 255},
+    NetPlayer13Dark = {76, 101, 117, 255},
+    NetPlayer14Dark = {65, 35, 47, 255},
+    NetPlayer15Dark = {72, 71, 61, 255},
+    NetPlayer16Dark = {85, 58, 47, 255},
+    NetPlayer17Dark = {87, 84, 84, 255},
+    NetPlayer18Dark = {116, 71, 77, 255},
+    NetPlayer19Dark = {93, 107, 45, 255},
+    NetPlayer20Dark = {6, 61, 43, 255},
+    NetPlayer21Dark = {61, 98, 127, 255},
+    NetPlayer22Dark = {85, 30, 115, 255},
+    NetPlayer23Dark = {103, 84, 6, 255},
+    NetPlayer24Dark = {35, 49, 86, 255},
+    NetPlayer25Dark = {21, 83, 92, 255},
+    NetPlayer26Dark = {93, 98, 62, 255},
+    NetPlayer27Dark = {100, 112, 127, 255},
+    NetPlayer28Dark = {120, 120, 75, 255},
+    NetPlayer29Dark = {152, 76, 93, 255},
+    NetPlayer30Dark = {124, 69, 69, 255},
+    NetPlayer31Dark = {10, 43, 50, 255},
+    NetPlayer32Dark = {95, 95, 10, 255},
+    Bronze = {180, 130, 97, 255},
+    Silver = {150, 153, 161, 255},
+    Gold = {214, 181, 99, 255},
+    Platinum = {166, 221, 190, 255},
+    Gang1 = {29, 100, 153, 255},
+    Gang2 = {214, 116, 15, 255},
+    Gang3 = {135, 125, 142, 255},
+    Gang4 = {229, 119, 185, 255},
+    SameCrew = {252, 239, 166, 255},
+    Freemode = {45, 110, 185, 255},
+    PauseBg = {0, 0, 0, 255},
+    Friendly = {93, 182, 229, 255},
+    Enemy = {194, 80, 80, 255},
+    Location = {240, 200, 80, 255},
+    Pickup = {114, 204, 114, 255},
+    PauseSingleplayer = {114, 204, 114, 255},
+    FreemodeDark = {22, 55, 92, 255},
+    InactiveMission = {154, 154, 154, 255},
+    Damage = {194, 80, 80, 255},
+    PinkLight = {252, 115, 201, 255},
+    PmMitemHighlight = {252, 177, 49, 255},
+    ScriptVariable = {0, 0, 0, 255},
+    Yoga = {109, 247, 204, 255},
+    Tennis = {241, 101, 34, 255},
+    Golf = {214, 189, 97, 255},
+    ShootingRange = {112, 25, 25, 255},
+    FlightSchool = {47, 92, 115, 255},
+    NorthBlue = {93, 182, 229, 255},
+    SocialClub = {234, 153, 28, 255},
+    PlatformBlue = {11, 55, 123, 255},
+    PlatformGreen = {146, 200, 62, 255},
+    PlatformGrey = {234, 153, 28, 255},
+    FacebookBlue = {66, 89, 148, 255},
+    IngameBg = {0, 0, 0, 255},
+    Darts = {114, 204, 114, 255},
+    Waypoint = {164, 76, 242, 255},
+    Michael = {101, 180, 212, 255},
+    Franklin = {171, 237, 171, 255},
+    Trevor = {255, 163, 87, 255},
+    GolfP1 = {240, 240, 240, 255},
+    GolfP2 = {235, 239, 30, 255},
+    GolfP3 = {255, 149, 14, 255},
+    GolfP4 = {246, 60, 161, 255},
+    WaypointLight = {210, 166, 249, 255},
+    WaypointDark = {82, 38, 121, 255},
+    PanelLight = {0, 0, 0, 255},
+    MichaelDark = {72, 103, 116, 255},
+    FranklinDark = {85, 118, 85, 255},
+    TrevorDark = {127, 81, 43, 255},
+    ObjectiveRoute = {240, 200, 80, 255},
+    PausemapTint = {0, 0, 0, 255},
+    PauseDeselect = {100, 100, 100, 255},
+    PmWeaponsPurchasable = {45, 110, 185, 255},
+    PmWeaponsLocked = {240, 240, 240, 255},
+    ScreenBg = {0, 0, 0, 255},
+    Chop = {224, 50, 50, 255},
+    PausemapTintHalf = {0, 0, 0, 255},
+    NorthBlueOfficial = {0, 71, 133, 255},
+    ScriptVariable2 = {0, 0, 0, 255},
+    H = {33, 118, 37, 255},
+    HDark = {37, 102, 40, 255},
+    T = {234, 153, 28, 255},
+    TDark = {225, 140, 8, 255},
+    HShard = {20, 40, 0, 255},
+    ControllerMichael = {48, 255, 255, 255},
+    ControllerFranklin = {48, 255, 0, 255},
+    ControllerTrevor = {176, 80, 0, 255},
+    ControllerChop = {127, 0, 0, 255},
+    VideoEditorVideo = {53, 166, 224, 255},
+    VideoEditorAudio = {162, 79, 157, 255},
+    VideoEditorText = {104, 192, 141, 255},
+    HbBlue = {29, 100, 153, 255},
+    HbYellow = {234, 153, 28, 255},
+    VideoEditorScore = {240, 160, 1, 255},
+    VideoEditorAudioFadeout = {59, 34, 57, 255},
+    VideoEditorTextFadeout = {41, 68, 53, 255},
+    VideoEditorScoreFadeout = {82, 58, 10, 255},
+    HeistBackground = {37, 102, 40, 255},
+    VideoEditorAmbient = {240, 200, 80, 255},
+    VideoEditorAmbientFadeout = {80, 70, 34, 255},
+    Gb = {255, 133, 85, 255},
+    G = {255, 194, 170, 255},
+    B = {255, 133, 85, 255},
+    LowFlow = {240, 200, 80, 255},
+    LowFlowDark = {126, 107, 41, 255},
+    G1 = {247, 159, 123, 255},
+    G2 = {226, 134, 187, 255},
+    G3 = {239, 238, 151, 255},
+    G4 = {113, 169, 175, 255},
+    G5 = {160, 140, 193, 255},
+    G6 = {141, 206, 167, 255},
+    G7 = {181, 214, 234, 255},
+    G8 = {178, 144, 132, 255},
+    G9 = {0, 132, 114, 255},
+    G10 = {216, 85, 117, 255},
+    G11 = {30, 100, 152, 255},
+    G12 = {43, 181, 117, 255},
+    G13 = {233, 141, 79, 255},
+    G14 = {137, 210, 215, 255},
+    G15 = {134, 125, 141, 255},
+    Adversary = {109, 34, 33, 255},
+    DegenRed = {255, 0, 0, 255},
+    DegenYellow = {255, 255, 0, 255},
+    DegenGreen = {0, 255, 0, 255},
+    DegenCyan = {0, 255, 255, 255},
+    DegenBlue = {0, 0, 255, 255},
+    DegenMagenta = {255, 0, 255, 255},
+    Stunt1 = {38, 136, 234, 255},
+    Stunt2 = {224, 50, 50, 255}
 }
 
 --[[
     Utils.lua
     Utilities
 --]]
-
 function GetResolution()
     local W, H = GetActiveScreenResolution()
     if (W / H) > 3.5 then
@@ -358,7 +627,7 @@ function string.split(inputstr, sep)
     if sep == nil then
         sep = "%s"
     end
-    local t = {};
+    local t = {}
     i = 1
     for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
         t[i] = str
@@ -388,7 +657,7 @@ function GetSafeZoneBounds()
 
     local W, H = 1920, 1080
 
-    return { X = math.round(SafeSize * ((W / H) * 5.4)), Y = math.round(SafeSize * 5.4) }
+    return {X = math.round(SafeSize * ((W / H) * 5.4)), Y = math.round(SafeSize * 5.4)}
 end
 
 function Controller()
@@ -399,14 +668,13 @@ end
     UIResRectangle.lua
     Elements
 --]]
-
 function UIResRectangle.New(X, Y, Width, Height, R, G, B, A)
     local _UIResRectangle = {
         X = tonumber(X) or 0,
         Y = tonumber(Y) or 0,
         Width = tonumber(Width) or 0,
         Height = tonumber(Height) or 0,
-        _Colour = { R = tonumber(R) or 255, G = tonumber(G) or 255, B = tonumber(B) or 255, A = tonumber(A) or 255 },
+        _Colour = {R = tonumber(R) or 255, G = tonumber(G) or 255, B = tonumber(B) or 255, A = tonumber(A) or 255}
     }
     return setmetatable(_UIResRectangle, UIResRectangle)
 end
@@ -416,7 +684,7 @@ function UIResRectangle:Position(X, Y)
         self.X = tonumber(X)
         self.Y = tonumber(Y)
     else
-        return { X = self.X, Y = self.Y }
+        return {X = self.X, Y = self.Y}
     end
 end
 
@@ -425,7 +693,7 @@ function UIResRectangle:Size(Width, Height)
         self.Width = tonumber(Width)
         self.Height = tonumber(Height)
     else
-        return { Width = self.Width, Height = self.Height }
+        return {Width = self.Width, Height = self.Height}
     end
 end
 
@@ -445,21 +713,38 @@ function UIResRectangle:Draw()
     local Size = self:Size()
     Size.Width, Size.Height = FormatXWYH(Size.Width, Size.Height)
     Position.X, Position.Y = FormatXWYH(Position.X, Position.Y)
-    DrawRect(Position.X + Size.Width * 0.5, Position.Y + Size.Height * 0.5, Size.Width, Size.Height, self._Colour.R, self._Colour.G, self._Colour.B, self._Colour.A)
+    DrawRect(
+        Position.X + Size.Width * 0.5,
+        Position.Y + Size.Height * 0.5,
+        Size.Width,
+        Size.Height,
+        self._Colour.R,
+        self._Colour.G,
+        self._Colour.B,
+        self._Colour.A
+    )
 end
 
 function DrawRectangle(X, Y, Width, Height, R, G, B, A)
     X, Y, Width, Height = X or 0, Y or 0, Width or 0, Height or 0
     X, Y = FormatXWYH(X, Y)
     Width, Height = FormatXWYH(Width, Height)
-    DrawRect(X + Width * 0.5, Y + Height * 0.5, Width, Height, tonumber(R) or 255, tonumber(G) or 255, tonumber(B) or 255, tonumber(A) or 255)
+    DrawRect(
+        X + Width * 0.5,
+        Y + Height * 0.5,
+        Width,
+        Height,
+        tonumber(R) or 255,
+        tonumber(G) or 255,
+        tonumber(B) or 255,
+        tonumber(A) or 255
+    )
 end
 
 --[[
     UIResText.lua
     Elements
 --]]
-
 function GetCharacterCount(str)
     local characters = 0
     for c in str:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
@@ -548,12 +833,12 @@ function UIResText.New(Text, X, Y, Scale, R, G, B, A, Font, Alignment, DropShado
         X = tonumber(X) or 0,
         Y = tonumber(Y) or 0,
         Scale = tonumber(Scale) or 0,
-        _Colour = { R = tonumber(R) or 255, G = tonumber(G) or 255, B = tonumber(B) or 255, A = tonumber(A) or 255 },
+        _Colour = {R = tonumber(R) or 255, G = tonumber(G) or 255, B = tonumber(B) or 255, A = tonumber(A) or 255},
         Font = tonumber(Font) or 0,
         Alignment = Alignment or nil,
         DropShadow = Dropshadow or nil,
         Outline = Outline or nil,
-        WordWrap = tonumber(WordWrap) or 0,
+        WordWrap = tonumber(WordWrap) or 0
     }
     return setmetatable(_UIResText, UIResText)
 end
@@ -563,7 +848,7 @@ function UIResText:Position(X, Y)
         self.X = tonumber(X)
         self.Y = tonumber(Y)
     else
-        return { X = self.X, Y = self.Y }
+        return {X = self.X, Y = self.Y}
     end
 end
 
@@ -660,7 +945,6 @@ end
     Sprite.lua
     Elements
 --]]
-
 function Sprite.New(TxtDictionary, TxtName, X, Y, Width, Height, Heading, R, G, B, A)
     local _Sprite = {
         TxtDictionary = tostring(TxtDictionary),
@@ -670,7 +954,7 @@ function Sprite.New(TxtDictionary, TxtName, X, Y, Width, Height, Heading, R, G, 
         Width = tonumber(Width) or 0,
         Height = tonumber(Height) or 0,
         Heading = tonumber(Heading) or 0,
-        _Colour = { R = tonumber(R) or 255, G = tonumber(G) or 255, B = tonumber(B) or 255, A = tonumber(A) or 255 },
+        _Colour = {R = tonumber(R) or 255, G = tonumber(G) or 255, B = tonumber(B) or 255, A = tonumber(A) or 255}
     }
     return setmetatable(_Sprite, Sprite)
 end
@@ -680,7 +964,7 @@ function Sprite:Position(X, Y)
         self.X = tonumber(X)
         self.Y = tonumber(Y)
     else
-        return { X = self.X, Y = self.Y }
+        return {X = self.X, Y = self.Y}
     end
 end
 
@@ -689,7 +973,7 @@ function Sprite:Size(Width, Height)
         self.Width = tonumber(Width)
         self.Height = tonumber(Height)
     else
-        return { Width = self.Width, Height = self.Height }
+        return {Width = self.Width, Height = self.Height}
     end
 end
 
@@ -712,7 +996,19 @@ function Sprite:Draw()
     local Size = self:Size()
     Size.Width, Size.Height = FormatXWYH(Size.Width, Size.Height)
     Position.X, Position.Y = FormatXWYH(Position.X, Position.Y)
-    DrawSprite(self.TxtDictionary, self.TxtName, Position.X + Size.Width * 0.5, Position.Y + Size.Height * 0.5, Size.Width, Size.Height, self.Heading, self._Colour.R, self._Colour.G, self._Colour.B, self._Colour.A)
+    DrawSprite(
+        self.TxtDictionary,
+        self.TxtName,
+        Position.X + Size.Width * 0.5,
+        Position.Y + Size.Height * 0.5,
+        Size.Width,
+        Size.Height,
+        self.Heading,
+        self._Colour.R,
+        self._Colour.G,
+        self._Colour.B,
+        self._Colour.A
+    )
 end
 
 function DrawTexture(TxtDictionary, TxtName, X, Y, Width, Height, Heading, R, G, B, A)
@@ -722,14 +1018,25 @@ function DrawTexture(TxtDictionary, TxtName, X, Y, Width, Height, Heading, R, G,
     X, Y, Width, Height = X or 0, Y or 0, Width or 0, Height or 0
     X, Y = FormatXWYH(X, Y)
     Width, Height = FormatXWYH(Width, Height)
-    DrawSprite(tostring(TxtDictionary) or "", tostring(TxtName) or "", X + Width * 0.5, Y + Height * 0.5, Width, Height, tonumber(Heading) or 0, tonumber(R) or 255, tonumber(G) or 255, tonumber(B) or 255, tonumber(A) or 255)
+    DrawSprite(
+        tostring(TxtDictionary) or "",
+        tostring(TxtName) or "",
+        X + Width * 0.5,
+        Y + Height * 0.5,
+        Width,
+        Height,
+        tonumber(Heading) or 0,
+        tonumber(R) or 255,
+        tonumber(G) or 255,
+        tonumber(B) or 255,
+        tonumber(A) or 255
+    )
 end
 
 --[[
     StringMeasurer.lua
     Elements
 --]]
-
 function MeasureString(str)
     local output = 0
     for i = 1, GetCharacterCount(str), 1 do
@@ -744,7 +1051,6 @@ end
     Badge.lua
     Elements
 --]]
-
 function GetBadgeTexture(Badge, Selected)
     if BadgeTexture[Badge] then
         return BadgeTexture[Badge](Selected)
@@ -773,33 +1079,33 @@ end
     Colours.lua
     Elements
 --]]
-
 --[[
     UIMenuItem.lua
     Items
 --]]
-
 function UIMenuItem.New(Text, Description)
     _UIMenuItem = {
         Rectangle = UIResRectangle.New(0, 0, 431, 38, 255, 255, 255, 20),
         Text = UIResText.New(tostring(Text) or "", 8, 0, 0.33, 245, 245, 245, 255, 0),
-        _Description = tostring(Description) or "";
+        _Description = tostring(Description) or "",
         SelectedSprite = Sprite.New("commonmenu", "gradient_nav", 0, 0, 431, 38),
-        LeftBadge = { Sprite = Sprite.New("commonmenu", "", 0, 0, 40, 40), Badge = 0 },
-        RightBadge = { Sprite = Sprite.New("commonmenu", "", 0, 0, 40, 40), Badge = 0 },
+        LeftBadge = {Sprite = Sprite.New("commonmenu", "", 0, 0, 40, 40), Badge = 0},
+        RightBadge = {Sprite = Sprite.New("commonmenu", "", 0, 0, 40, 40), Badge = 0},
         Label = {
             Text = UIResText.New("", 0, 0, 0.35, 245, 245, 245, 255, 0, "Right"),
-            MainColour = { R = 255, G = 255, B = 255, A = 255 },
-            HighlightColour = { R = 0, G = 0, B = 0, A = 255 },
+            MainColour = {R = 255, G = 255, B = 255, A = 255},
+            HighlightColour = {R = 0, G = 0, B = 0, A = 255}
         },
         _Selected = false,
         _Hovered = false,
         _Enabled = true,
-        _Offset = { X = 0, Y = 0 },
+        _Offset = {X = 0, Y = 0},
         ParentMenu = nil,
         Panels = {},
-        Activated = function(menu, item, panels) end,
-        ActivatedPanel = function(menu, item, panel, panelvalue) end,
+        Activated = function(menu, item, panels)
+        end,
+        ActivatedPanel = function(menu, item, panel, panelvalue)
+        end
     }
     return setmetatable(_UIMenuItem, UIMenuItem)
 end
@@ -952,10 +1258,20 @@ function UIMenuItem:Draw()
     if self._Enabled then
         if self._Selected then
             self.Text:Colour(0, 0, 0, 255)
-            self.Label.Text:Colour(self.Label.HighlightColour.R, self.Label.HighlightColour.G, self.Label.HighlightColour.B, self.Label.HighlightColour.A)
+            self.Label.Text:Colour(
+                self.Label.HighlightColour.R,
+                self.Label.HighlightColour.G,
+                self.Label.HighlightColour.B,
+                self.Label.HighlightColour.A
+            )
         else
             self.Text:Colour(245, 245, 245, 255)
-            self.Label.Text:Colour(self.Label.MainColour.R, self.Label.MainColour.G, self.Label.MainColour.B, self.Label.MainColour.A)
+            self.Label.Text:Colour(
+                self.Label.MainColour.R,
+                self.Label.MainColour.G,
+                self.Label.MainColour.B,
+                self.Label.MainColour.A
+            )
         end
     else
         self.Text:Colour(163, 159, 148, 255)
@@ -992,13 +1308,13 @@ end
     UIMenuCheckboxItem.lua
     Items
 --]]
-
 function UIMenuCheckboxItem.New(Text, Check, Description)
     local _UIMenuCheckboxItem = {
         Base = UIMenuItem.New(Text or "", Description or ""),
         CheckedSprite = Sprite.New("commonmenu", "shop_box_blank", 410, 95, 50, 50),
         Checked = tobool(Check),
-        CheckboxEvent = function(menu, item, checked) end,
+        CheckboxEvent = function(menu, item, checked)
+        end
     }
     return setmetatable(_UIMenuCheckboxItem, UIMenuCheckboxItem)
 end
@@ -1014,7 +1330,10 @@ end
 function UIMenuCheckboxItem:Position(Y)
     if tonumber(Y) then
         self.Base:Position(Y)
-        self.CheckedSprite:Position(380 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, Y + 138 + self.Base._Offset.Y)
+        self.CheckedSprite:Position(
+            380 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            Y + 138 + self.Base._Offset.Y
+        )
     end
 end
 
@@ -1106,10 +1425,13 @@ end
     UIMenuListItem.lua
     Items
 --]]
-
 function UIMenuListItem.New(Text, Items, Index, Description)
-    if type(Items) ~= "table" then Items = {} end
-    if Index == 0 then Index = 1 end
+    if type(Items) ~= "table" then
+        Items = {}
+    end
+    if Index == 0 then
+        Index = 1
+    end
     local _UIMenuListItem = {
         Base = UIMenuItem.New(Text or "", Description or ""),
         Items = Items,
@@ -1118,8 +1440,10 @@ function UIMenuListItem.New(Text, Items, Index, Description)
         ItemText = UIResText.New("", 290, 104, 0.35, 255, 255, 255, 255, 0, "Right"),
         _Index = tonumber(Index) or 1,
         Panels = {},
-        OnListChanged = function(menu, item, newindex) end,
-        OnListSelected = function(menu, item, newindex) end,
+        OnListChanged = function(menu, item, newindex)
+        end,
+        OnListSelected = function(menu, item, newindex)
+        end
     }
     return setmetatable(_UIMenuListItem, UIMenuListItem)
 end
@@ -1134,9 +1458,18 @@ end
 
 function UIMenuListItem:Position(Y)
     if tonumber(Y) then
-        self.LeftArrow:Position(300 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, 147 + Y + self.Base._Offset.Y)
-        self.RightArrow:Position(400 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, 147 + Y + self.Base._Offset.Y)
-        self.ItemText:Position(300 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, 147 + Y + self.Base._Offset.Y)
+        self.LeftArrow:Position(
+            300 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            147 + Y + self.Base._Offset.Y
+        )
+        self.RightArrow:Position(
+            400 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            147 + Y + self.Base._Offset.Y
+        )
+        self.ItemText:Position(
+            300 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            147 + Y + self.Base._Offset.Y
+        )
         self.Base:Position(Y)
     end
 end
@@ -1212,7 +1545,11 @@ function UIMenuListItem:ItemToIndex(Item)
     for i = 1, #self.Items do
         if type(Item) == type(self.Items[i]) and Item == self.Items[i] then
             return i
-        elseif type(self.Items[i]) == "table" and (type(Item) == type(self.Items[i].Name) or type(Item) == type(self.Items[i].Value)) and (Item == self.Items[i].Name or Item == self.Items[i].Value) then
+        elseif
+            type(self.Items[i]) == "table" and
+                (type(Item) == type(self.Items[i].Name) or type(Item) == type(self.Items[i].Value)) and
+                (Item == self.Items[i].Name or Item == self.Items[i].Value)
+         then
             return i
         end
     end
@@ -1220,7 +1557,9 @@ end
 
 function UIMenuListItem:IndexToItem(Index)
     if tonumber(Index) then
-        if tonumber(Index) == 0 then Index = 1 end
+        if tonumber(Index) == 0 then
+            Index = 1
+        end
         if self.Items[tonumber(Index)] then
             return self.Items[tonumber(Index)]
         end
@@ -1293,7 +1632,9 @@ function UIMenuListItem:Draw()
         self.RightArrow:Colour(163, 159, 148, 255)
     end
 
-    local Text = (type(self.Items[self._Index]) == "table") and tostring(self.Items[self._Index].Name) or tostring(self.Items[self._Index])
+    local Text =
+        (type(self.Items[self._Index]) == "table") and tostring(self.Items[self._Index].Name) or
+        tostring(self.Items[self._Index])
     local Offset = MeasureStringWidth(Text, 0, 0.35)
 
     self.ItemText:Text(Text)
@@ -1314,10 +1655,13 @@ end
     UIMenuSliderItem.lua
     Items
 --]]
-
 function UIMenuSliderItem.New(Text, Items, Index, Description, Divider)
-    if type(Items) ~= "table" then Items = {} end
-    if Index == 0 then Index = 1 end
+    if type(Items) ~= "table" then
+        Items = {}
+    end
+    if Index == 0 then
+        Index = 1
+    end
     local _UIMenuSliderItem = {
         Base = UIMenuItem.New(Text or "", Description or ""),
         Items = Items,
@@ -1328,8 +1672,10 @@ function UIMenuSliderItem.New(Text, Items, Index, Description, Divider)
         Slider = UIResRectangle.New(0, 0, 75, 9, 57, 116, 200, 255),
         Divider = UIResRectangle.New(0, 0, 2.5, 20, 245, 245, 245, 255),
         _Index = tonumber(Index) or 1,
-        OnSliderChanged = function(menu, item, newindex) end,
-        OnSliderSelected = function(menu, item, newindex) end,
+        OnSliderChanged = function(menu, item, newindex)
+        end,
+        OnSliderSelected = function(menu, item, newindex)
+        end
     }
     return setmetatable(_UIMenuSliderItem, UIMenuSliderItem)
 end
@@ -1344,11 +1690,26 @@ end
 
 function UIMenuSliderItem:Position(Y)
     if tonumber(Y) then
-        self.Background:Position(250 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, Y + 158.5 + self.Base._Offset.Y)
-        self.Slider:Position(250 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, Y + 158.5 + self.Base._Offset.Y)
-        self.Divider:Position(323.5 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, Y + 153 + self.Base._Offset.Y)
-        self.LeftArrow:Position(235 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, 155.5 + Y + self.Base._Offset.Y)
-        self.RightArrow:Position(400 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, 155.5 + Y + self.Base._Offset.Y)
+        self.Background:Position(
+            250 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            Y + 158.5 + self.Base._Offset.Y
+        )
+        self.Slider:Position(
+            250 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            Y + 158.5 + self.Base._Offset.Y
+        )
+        self.Divider:Position(
+            323.5 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            Y + 153 + self.Base._Offset.Y
+        )
+        self.LeftArrow:Position(
+            235 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            155.5 + Y + self.Base._Offset.Y
+        )
+        self.RightArrow:Position(
+            400 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            155.5 + Y + self.Base._Offset.Y
+        )
         self.Base:Position(Y)
     end
 end
@@ -1430,7 +1791,9 @@ end
 
 function UIMenuSliderItem:IndexToItem(Index)
     if tonumber(Index) then
-        if tonumber(Index) == 0 then Index = 1 end
+        if tonumber(Index) == 0 then
+            Index = 1
+        end
         if self.Items[tonumber(Index)] then
             return self.Items[tonumber(Index)]
         end
@@ -1485,18 +1848,27 @@ end
     UIMenuColouredItem.lua
     Items
 --]]
-
 function UIMenuColouredItem.New(Text, Description, MainColour, HighlightColour)
-    if type(Colour) ~= "table" then Colour = { R = 0, G = 0, B = 0, A = 255 } end
-    if type(HighlightColour) ~= "table" then Colour = { R = 255, G = 255, B = 255, A = 255 } end
+    if type(Colour) ~= "table" then
+        Colour = {R = 0, G = 0, B = 0, A = 255}
+    end
+    if type(HighlightColour) ~= "table" then
+        Colour = {R = 255, G = 255, B = 255, A = 255}
+    end
     local _UIMenuColouredItem = {
         Base = UIMenuItem.New(Text or "", Description or ""),
         Rectangle = UIResRectangle.New(0, 0, 431, 38, MainColour.R, MainColour.G, MainColour.B, MainColour.A),
         MainColour = MainColour,
         HighlightColour = HighlightColour,
-        Activated = function(menu, item) end,
+        Activated = function(menu, item)
+        end
     }
-    _UIMenuColouredItem.Base.SelectedSprite:Colour(HighlightColour.R, HighlightColour.G, HighlightColour.B, HighlightColour.A)
+    _UIMenuColouredItem.Base.SelectedSprite:Colour(
+        HighlightColour.R,
+        HighlightColour.G,
+        HighlightColour.B,
+        HighlightColour.A
+    )
     return setmetatable(_UIMenuColouredItem, UIMenuColouredItem)
 end
 
@@ -1604,22 +1976,27 @@ end
     UIMenuProgressItem.lua
     Items
 --]]
-
 function UIMenuProgressItem.New(Text, Items, Index, Description, Counter)
-    if type(Items) ~= "table" then Items = {} end
-    if Index == 0 then Index = 1 end
+    if type(Items) ~= "table" then
+        Items = {}
+    end
+    if Index == 0 then
+        Index = 1
+    end
     local _UIMenuProgressItem = {
         Base = UIMenuItem.New(Text or "", Description or ""),
         Data = {
             Items = Items,
             Counter = tobool(Counter),
             Max = 407.5,
-            Index = tonumber(Index) or 1,
+            Index = tonumber(Index) or 1
         },
         Background = UIResRectangle.New(0, 0, 415, 20),
         Bar = UIResRectangle.New(0, 0, 407.5, 12.5),
-        OnProgressChanged = function(menu, item, newindex) end,
-        OnProgressSelected = function(menu, item, newindex) end,
+        OnProgressChanged = function(menu, item, newindex)
+        end,
+        OnProgressSelected = function(menu, item, newindex)
+        end
     }
 
     _UIMenuProgressItem.Base.Rectangle.Height = 60
@@ -1628,10 +2005,15 @@ function UIMenuProgressItem.New(Text, Items, Index, Description, Counter)
     if _UIMenuProgressItem.Data.Counter then
         _UIMenuProgressItem.Base:RightLabel(_UIMenuProgressItem.Data.Index .. "/" .. #_UIMenuProgressItem.Data.Items)
     else
-        _UIMenuProgressItem.Base:RightLabel((type(_UIMenuProgressItem.Data.Items[_UIMenuProgressItem.Data.Index]) == "table") and tostring(_UIMenuProgressItem.Data.Items[_UIMenuProgressItem.Data.Index].Name) or tostring(_UIMenuProgressItem.Data.Items[_UIMenuProgressItem.Data.Index]))
+        _UIMenuProgressItem.Base:RightLabel(
+            (type(_UIMenuProgressItem.Data.Items[_UIMenuProgressItem.Data.Index]) == "table") and
+                tostring(_UIMenuProgressItem.Data.Items[_UIMenuProgressItem.Data.Index].Name) or
+                tostring(_UIMenuProgressItem.Data.Items[_UIMenuProgressItem.Data.Index])
+        )
     end
 
-    _UIMenuProgressItem.Bar.Width = _UIMenuProgressItem.Data.Index / #_UIMenuProgressItem.Data.Items * _UIMenuProgressItem.Data.Max
+    _UIMenuProgressItem.Bar.Width =
+        _UIMenuProgressItem.Data.Index / #_UIMenuProgressItem.Data.Items * _UIMenuProgressItem.Data.Max
 
     return setmetatable(_UIMenuProgressItem, UIMenuProgressItem)
 end
@@ -1647,8 +2029,14 @@ end
 function UIMenuProgressItem:Position(Y)
     if tonumber(Y) then
         self.Base:Position(Y)
-        self.Background:Position(8 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, 177 + Y + self.Base._Offset.Y)
-        self.Bar:Position(11.75 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset, 180.75 + Y + self.Base._Offset.Y)
+        self.Background:Position(
+            8 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            177 + Y + self.Base._Offset.Y
+        )
+        self.Bar:Position(
+            11.75 + self.Base._Offset.X + self.Base.ParentMenu.WidthOffset,
+            180.75 + Y + self.Base._Offset.Y
+        )
     end
 end
 
@@ -1718,7 +2106,10 @@ function UIMenuProgressItem:Index(Index)
         if self.Data.Counter then
             self.Base:RightLabel(self.Data.Index .. "/" .. #self.Data.Items)
         else
-            self.Base:RightLabel((type(self.Data.Items[self.Data.Index]) == "table") and tostring(self.Data.Items[self.Data.Index].Name) or tostring(self.Data.Items[self.Data.Index]))
+            self.Base:RightLabel(
+                (type(self.Data.Items[self.Data.Index]) == "table") and tostring(self.Data.Items[self.Data.Index].Name) or
+                    tostring(self.Data.Items[self.Data.Index])
+            )
         end
 
         self.Bar.Width = self.Data.Index / #self.Data.Items * self.Data.Max
@@ -1731,7 +2122,11 @@ function UIMenuProgressItem:ItemToIndex(Item)
     for i = 1, #self.Data.Items do
         if type(Item) == type(self.Data.Items[i]) and Item == self.Data.Items[i] then
             return i
-        elseif type(self.Data.Items[i]) == "table" and (type(Item) == type(self.Data.Items[i].Name) or type(Item) == type(self.Data.Items[i].Value)) and (Item == self.Data.Items[i].Name or Item == self.Data.Items[i].Value) then
+        elseif
+            type(self.Data.Items[i]) == "table" and
+                (type(Item) == type(self.Data.Items[i].Name) or type(Item) == type(self.Data.Items[i].Value)) and
+                (Item == self.Data.Items[i].Name or Item == self.Data.Items[i].Value)
+         then
             return i
         end
     end
@@ -1739,7 +2134,9 @@ end
 
 function UIMenuProgressItem:IndexToItem(Index)
     if tonumber(Index) then
-        if tonumber(Index) == 0 then Index = 1 end
+        if tonumber(Index) == 0 then
+            Index = 1
+        end
         if self.Data.Items[tonumber(Index)] then
             return self.Data.Items[tonumber(Index)]
         end
@@ -1760,7 +2157,13 @@ end
 
 function UIMenuProgressItem:CalculateProgress(CursorX)
     local Progress = CursorX - self.Bar.X
-    self:Index(math.round(#self.Data.Items * (((Progress >= 0 and Progress <= self.Data.Max) and Progress or ((Progress < 0) and 0 or self.Data.Max)) / self.Data.Max)))
+    self:Index(
+        math.round(
+            #self.Data.Items *
+                (((Progress >= 0 and Progress <= self.Data.Max) and Progress or ((Progress < 0) and 0 or self.Data.Max)) /
+                    self.Data.Max)
+        )
+    )
 end
 
 function UIMenuProgressItem:Draw()
@@ -1782,20 +2185,41 @@ end
     UIMenuHeritageWindow.lua
     Windows
 --]]
-
 function UIMenuHeritageWindow.New(Mum, Dad)
-    if not tonumber(Mum) then Mum = 0 end
-    if not (Mum >= 0 and Mum <= 21) then Mum = 0 end
-    if not tonumber(Dad) then Dad = 0 end
-    if not (Dad >= 0 and Dad <= 23) then Dad = 0 end
+    if not tonumber(Mum) then
+        Mum = 0
+    end
+    if not (Mum >= 0 and Mum <= 21) then
+        Mum = 0
+    end
+    if not tonumber(Dad) then
+        Dad = 0
+    end
+    if not (Dad >= 0 and Dad <= 23) then
+        Dad = 0
+    end
     _UIMenuHeritageWindow = {
         Background = Sprite.New("pause_menu_pages_char_mom_dad", "mumdadbg", 0, 0, 431, 228), -- Background is required, must be a sprite or a rectangle.
-        MumSprite = Sprite.New("char_creator_portraits", ((Mum < 21) and "female_" .. Mum or "special_female_" .. (tonumber(string.sub(Mum, 2, 2)) - 1)), 0, 0, 228, 228),
-        DadSprite = Sprite.New("char_creator_portraits", ((Dad < 21) and "male_" .. Dad or "special_male_" .. (tonumber(string.sub(Dad, 2, 2)) - 1)), 0, 0, 228, 228),
+        MumSprite = Sprite.New(
+            "char_creator_portraits",
+            ((Mum < 21) and "female_" .. Mum or "special_female_" .. (tonumber(string.sub(Mum, 2, 2)) - 1)),
+            0,
+            0,
+            228,
+            228
+        ),
+        DadSprite = Sprite.New(
+            "char_creator_portraits",
+            ((Dad < 21) and "male_" .. Dad or "special_male_" .. (tonumber(string.sub(Dad, 2, 2)) - 1)),
+            0,
+            0,
+            228,
+            228
+        ),
         Mum = Mum,
         Dad = Dad,
-        _Offset = { X = 0, Y = 0 }, -- required
-        ParentMenu = nil, -- required
+        _Offset = {X = 0, Y = 0}, -- required
+        ParentMenu = nil -- required
     }
     return setmetatable(_UIMenuHeritageWindow, UIMenuHeritageWindow)
 end
@@ -1830,16 +2254,26 @@ function UIMenuHeritageWindow:Position(Y) -- required
 end
 
 function UIMenuHeritageWindow:Index(Mum, Dad)
-    if not tonumber(Mum) then Mum = self.Mum end
-    if not (Mum >= 0 and Mum <= 21) then Mum = self.Mum end
-    if not tonumber(Dad) then Dad = self.Dad end
-    if not (Dad >= 0 and Dad <= 23) then Dad = self.Dad end
+    if not tonumber(Mum) then
+        Mum = self.Mum
+    end
+    if not (Mum >= 0 and Mum <= 21) then
+        Mum = self.Mum
+    end
+    if not tonumber(Dad) then
+        Dad = self.Dad
+    end
+    if not (Dad >= 0 and Dad <= 23) then
+        Dad = self.Dad
+    end
 
     self.Mum = Mum
     self.Dad = Dad
 
-    self.MumSprite.TxtName = ((self.Mum < 21) and "female_" .. self.Mum or "special_female_" .. (tonumber(string.sub(Mum, 2, 2)) - 1))
-    self.DadSprite.TxtName = ((self.Dad < 21) and "male_" .. self.Dad or "special_male_" .. (tonumber(string.sub(Dad, 2, 2)) - 1))
+    self.MumSprite.TxtName =
+        ((self.Mum < 21) and "female_" .. self.Mum or "special_female_" .. (tonumber(string.sub(Mum, 2, 2)) - 1))
+    self.DadSprite.TxtName =
+        ((self.Dad < 21) and "male_" .. self.Dad or "special_male_" .. (tonumber(string.sub(Dad, 2, 2)) - 1))
 end
 
 function UIMenuHeritageWindow:Draw() -- required
@@ -1853,27 +2287,28 @@ end
     UIMenuGridPanel.lua
     Panels
 --]]
-
 UIMenuGridPanel = setmetatable({}, UIMenuGridPanel)
 UIMenuGridPanel.__index = UIMenuGridPanel
-UIMenuGridPanel.__call = function() return "UIMenuPanel", "UIMenuGridPanel" end
+UIMenuGridPanel.__call = function()
+    return "UIMenuPanel", "UIMenuGridPanel"
+end
 
 function UIMenuGridPanel.New(TopText, LeftText, RightText, BottomText)
     _UIMenuGridPanel = {
         Data = {
-            Enabled = true,
+            Enabled = true
         },
         Background = Sprite.New("commonmenu", "gradient_bgd", 0, 0, 431, 275),
         Grid = Sprite.New("pause_menu_pages_char_mom_dad", "nose_grid", 0, 0, 200, 200, 0),
         Circle = Sprite.New("mpinventory", "in_world_circle", 0, 0, 20, 20, 0),
-        Audio = { Slider = "CONTINUOUS_SLIDER", Library = "HUD_FRONTEND_DEFAULT_SOUNDSET", Id = nil },
+        Audio = {Slider = "CONTINUOUS_SLIDER", Library = "HUD_FRONTEND_DEFAULT_SOUNDSET", Id = nil},
         ParentItem = nil,
         Text = {
             Top = UIResText.New(TopText or "Top", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
             Left = UIResText.New(LeftText or "Left", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
             Right = UIResText.New(RightText or "Right", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
-            Bottom = UIResText.New(BottomText or "Bottom", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
-        },
+            Bottom = UIResText.New(BottomText or "Bottom", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre")
+        }
     }
     return setmetatable(_UIMenuGridPanel, UIMenuGridPanel)
 end
@@ -1896,10 +2331,17 @@ end
 
 function UIMenuGridPanel:CirclePosition(X, Y)
     if tonumber(X) and tonumber(Y) then
-        self.Circle.X = (self.Grid.X + 20) + ((self.Grid.Width - 40) * ((X >= 0.0 and X <= 1.0) and X or 0.0)) - (self.Circle.Width / 2)
-        self.Circle.Y = (self.Grid.Y + 20) + ((self.Grid.Height - 40) * ((Y >= 0.0 and Y <= 1.0) and Y or 0.0)) - (self.Circle.Height / 2)
+        self.Circle.X =
+            (self.Grid.X + 20) + ((self.Grid.Width - 40) * ((X >= 0.0 and X <= 1.0) and X or 0.0)) -
+            (self.Circle.Width / 2)
+        self.Circle.Y =
+            (self.Grid.Y + 20) + ((self.Grid.Height - 40) * ((Y >= 0.0 and Y <= 1.0) and Y or 0.0)) -
+            (self.Circle.Height / 2)
     else
-        return math.round((self.Circle.X - (self.Grid.X + 20) + (self.Circle.Width / 2)) / (self.Grid.Width - 40), 2), math.round((self.Circle.Y - (self.Grid.Y + 20) + (self.Circle.Height / 2)) / (self.Grid.Height - 40), 2)
+        return math.round((self.Circle.X - (self.Grid.X + 20) + (self.Circle.Width / 2)) / (self.Grid.Width - 40), 2), math.round(
+            (self.Circle.Y - (self.Grid.Y + 20) + (self.Circle.Height / 2)) / (self.Grid.Height - 40),
+            2
+        )
     end
 end
 
@@ -1926,59 +2368,126 @@ function UIMenuGridPanel:UpdateParent(X, Y)
     if ParentType == "UIMenuListItem" then
         local PanelItemIndex = self.ParentItem:FindPanelItem()
         if PanelItemIndex then
-            self.ParentItem.Items[PanelItemIndex].Value[self.ParentItem:FindPanelIndex(self)] = { X = X, Y = Y }
+            self.ParentItem.Items[PanelItemIndex].Value[self.ParentItem:FindPanelIndex(self)] = {X = X, Y = Y}
             self.ParentItem:Index(PanelItemIndex)
-            self.ParentItem.Base.ParentMenu.OnListChange(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
+            self.ParentItem.Base.ParentMenu.OnListChange(
+                self.ParentItem.Base.ParentMenu,
+                self.ParentItem,
+                self.ParentItem._Index
+            )
             self.ParentItem.OnListChanged(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
         else
             local PanelIndex = self.ParentItem:FindPanelIndex(self)
             for Index = 1, #self.ParentItem.Items do
                 if type(self.ParentItem.Items[Index]) == "table" then
-                    if not self.ParentItem.Items[Index].Panels then self.ParentItem.Items[Index].Panels = {} end
-                    self.ParentItem.Items[Index].Panels[PanelIndex] = { X = X, Y = Y }
+                    if not self.ParentItem.Items[Index].Panels then
+                        self.ParentItem.Items[Index].Panels = {}
+                    end
+                    self.ParentItem.Items[Index].Panels[PanelIndex] = {X = X, Y = Y}
                 else
-                    self.ParentItem.Items[Index] = { Name = tostring(self.ParentItem.Items[Index]), Value = self.ParentItem.Items[Index], Panels = { [PanelIndex] = { X = X, Y = Y } } }
+                    self.ParentItem.Items[Index] = {
+                        Name = tostring(self.ParentItem.Items[Index]),
+                        Value = self.ParentItem.Items[Index],
+                        Panels = {[PanelIndex] = {X = X, Y = Y}}
+                    }
                 end
             end
-            self.ParentItem.Base.ParentMenu.OnListChange(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
+            self.ParentItem.Base.ParentMenu.OnListChange(
+                self.ParentItem.Base.ParentMenu,
+                self.ParentItem,
+                self.ParentItem._Index
+            )
             self.ParentItem.OnListChanged(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
         end
     elseif ParentType == "UIMenuItem" then
-        self.ParentItem.ActivatedPanel(self.ParentItem.ParentMenu, self.ParentItem, self, { X = X, Y = Y })
+        self.ParentItem.ActivatedPanel(self.ParentItem.ParentMenu, self.ParentItem, self, {X = X, Y = Y})
     end
 end
 
 function UIMenuGridPanel:Functions()
-    local SafeZone = { X = 0, Y = 0 }
+    local SafeZone = {X = 0, Y = 0}
     if self.ParentItem:SetParentMenu().Settings.ScaleWithSafezone then
         SafeZone = GetSafeZoneBounds()
     end
 
-    if IsMouseInBounds(self.Grid.X + 20 + SafeZone.X, self.Grid.Y + 20 + SafeZone.Y, self.Grid.Width - 40, self.Grid.Height - 40) then
+    if
+        IsMouseInBounds(
+            self.Grid.X + 20 + SafeZone.X,
+            self.Grid.Y + 20 + SafeZone.Y,
+            self.Grid.Width - 40,
+            self.Grid.Height - 40
+        )
+     then
         if IsDisabledControlJustPressed(0, 24) then
             if not self.Pressed then
                 self.Pressed = true
-                Citizen.CreateThread(function()
-                    self.Audio.Id = GetSoundId()
-                    PlaySoundFrontend(self.Audio.Id, self.Audio.Slider, self.Audio.Library, 1)
-                    while IsDisabledControlPressed(0, 24) and IsMouseInBounds(self.Grid.X + 20 + SafeZone.X, self.Grid.Y + 20 + SafeZone.Y, self.Grid.Width - 40, self.Grid.Height - 40) do
-                        Citizen.Wait(0)
-                        local CursorX, CursorY = math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X - (self.Circle.Width / 2), math.round(GetControlNormal(0, 240) * 1080) - SafeZone.Y - (self.Circle.Height / 2)
+                Citizen.CreateThread(
+                    function()
+                        self.Audio.Id = GetSoundId()
+                        PlaySoundFrontend(self.Audio.Id, self.Audio.Slider, self.Audio.Library, 1)
+                        while IsDisabledControlPressed(0, 24) and
+                            IsMouseInBounds(
+                                self.Grid.X + 20 + SafeZone.X,
+                                self.Grid.Y + 20 + SafeZone.Y,
+                                self.Grid.Width - 40,
+                                self.Grid.Height - 40
+                            ) do
+                            Citizen.Wait(0)
+                            local CursorX, CursorY =
+                                math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X - (self.Circle.Width / 2),
+                                math.round(GetControlNormal(0, 240) * 1080) - SafeZone.Y - (self.Circle.Height / 2)
 
-                        self.Circle:Position(((CursorX > (self.Grid.X + 10 + self.Grid.Width - 40)) and (self.Grid.X + 10 + self.Grid.Width - 40) or ((CursorX < (self.Grid.X + 20 - (self.Circle.Width / 2))) and (self.Grid.X + 20 - (self.Circle.Width / 2)) or CursorX)), ((CursorY > (self.Grid.Y + 10 + self.Grid.Height - 40)) and (self.Grid.Y + 10 + self.Grid.Height - 40) or ((CursorY < (self.Grid.Y + 20 - (self.Circle.Height / 2))) and (self.Grid.Y + 20 - (self.Circle.Height / 2)) or CursorY)))
+                            self.Circle:Position(
+                                ((CursorX > (self.Grid.X + 10 + self.Grid.Width - 40)) and
+                                    (self.Grid.X + 10 + self.Grid.Width - 40) or
+                                    ((CursorX < (self.Grid.X + 20 - (self.Circle.Width / 2))) and
+                                        (self.Grid.X + 20 - (self.Circle.Width / 2)) or
+                                        CursorX)),
+                                ((CursorY > (self.Grid.Y + 10 + self.Grid.Height - 40)) and
+                                    (self.Grid.Y + 10 + self.Grid.Height - 40) or
+                                    ((CursorY < (self.Grid.Y + 20 - (self.Circle.Height / 2))) and
+                                        (self.Grid.Y + 20 - (self.Circle.Height / 2)) or
+                                        CursorY))
+                            )
+                        end
+                        StopSound(self.Audio.Id)
+                        ReleaseSoundId(self.Audio.Id)
+                        self.Pressed = false
                     end
-                    StopSound(self.Audio.Id)
-                    ReleaseSoundId(self.Audio.Id)
-                    self.Pressed = false
-                end)
-                Citizen.CreateThread(function()
-                    while IsDisabledControlPressed(0, 24) and IsMouseInBounds(self.Grid.X + 20 + SafeZone.X, self.Grid.Y + 20 + SafeZone.Y, self.Grid.Width - 40, self.Grid.Height - 40) do
-                        Citizen.Wait(75)
-                        local ResultX, ResultY = math.round((self.Circle.X - (self.Grid.X + 20) + (self.Circle.Width / 2)) / (self.Grid.Width - 40), 2), math.round((self.Circle.Y - (self.Grid.Y + 20) + (self.Circle.Height / 2)) / (self.Grid.Height - 40), 2)
+                )
+                Citizen.CreateThread(
+                    function()
+                        while IsDisabledControlPressed(0, 24) and
+                            IsMouseInBounds(
+                                self.Grid.X + 20 + SafeZone.X,
+                                self.Grid.Y + 20 + SafeZone.Y,
+                                self.Grid.Width - 40,
+                                self.Grid.Height - 40
+                            ) do
+                            Citizen.Wait(75)
+                            local ResultX, ResultY =
+                                math.round(
+                                    (self.Circle.X - (self.Grid.X + 20) + (self.Circle.Width / 2)) /
+                                        (self.Grid.Width - 40),
+                                    2
+                                ),
+                                math.round(
+                                    (self.Circle.Y - (self.Grid.Y + 20) + (self.Circle.Height / 2)) /
+                                        (self.Grid.Height - 40),
+                                    2
+                                )
 
-                        self:UpdateParent((((ResultX >= 0.0 and ResultX <= 1.0) and ResultX or ((ResultX <= 0) and 0.0) or 1.0) * 2) - 1, (((ResultY >= 0.0 and ResultY <= 1.0) and ResultY or ((ResultY <= 0) and 0.0) or 1.0) * 2) - 1)
+                            self:UpdateParent(
+                                (((ResultX >= 0.0 and ResultX <= 1.0) and ResultX or ((ResultX <= 0) and 0.0) or 1.0) *
+                                    2) -
+                                    1,
+                                (((ResultY >= 0.0 and ResultY <= 1.0) and ResultY or ((ResultY <= 0) and 0.0) or 1.0) *
+                                    2) -
+                                    1
+                            )
+                        end
                     end
-                end)
+                )
             end
         end
     end
@@ -2003,10 +2512,11 @@ end
     UIMenuColourPanel.lua
     Panels
 --]]
-
 UIMenuColourPanel = setmetatable({}, UIMenuColourPanel)
 UIMenuColourPanel.__index = UIMenuColourPanel
-UIMenuColourPanel.__call = function() return "UIMenuPanel", "UIMenuColourPanel" end
+UIMenuColourPanel.__call = function()
+    return "UIMenuPanel", "UIMenuColourPanel"
+end
 
 function UIMenuColourPanel.New(Title, Colours)
     _UIMenuColourPanel = {
@@ -2014,21 +2524,32 @@ function UIMenuColourPanel.New(Title, Colours)
             Pagination = {
                 Min = 1,
                 Max = 8,
-                Total = 8,
+                Total = 8
             },
             Index = 1000,
             Items = Colours,
             Title = Title or "Title",
             Enabled = true,
-            Value = 1,
+            Value = 1
         },
         Background = Sprite.New("commonmenu", "gradient_bgd", 0, 0, 431, 112),
         Bar = {},
         LeftArrow = Sprite.New("commonmenu", "arrowleft", 0, 0, 30, 30),
         RightArrow = Sprite.New("commonmenu", "arrowright", 0, 0, 30, 30),
         SelectedRectangle = UIResRectangle.New(0, 0, 44.5, 8),
-        Text = UIResText.New(Title .. " (1 of " .. #Colours .. ")" or "Title" .. " (1 of " .. #Colours .. ")", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
-        ParentItem = nil,
+        Text = UIResText.New(
+            Title .. " (1 of " .. #Colours .. ")" or "Title" .. " (1 of " .. #Colours .. ")",
+            0,
+            0,
+            0.35,
+            255,
+            255,
+            255,
+            255,
+            0,
+            "Centre"
+        ),
+        ParentItem = nil
     }
 
     for Index = 1, #Colours do
@@ -2071,7 +2592,11 @@ function UIMenuColourPanel:Position(Y) -- required
         for Index = 1, #self.Bar do
             self.Bar[Index]:Position(15 + (44.5 * (Index - 1)) + ParentOffsetX + (ParentOffsetWidth / 2), 55 + Y)
         end
-        self.SelectedRectangle:Position(15 + (44.5 * ((self:CurrentSelection() - self.Data.Pagination.Min) - 1)) + ParentOffsetX + (ParentOffsetWidth / 2), 47 + Y)
+        self.SelectedRectangle:Position(
+            15 + (44.5 * ((self:CurrentSelection() - self.Data.Pagination.Min) - 1)) + ParentOffsetX +
+                (ParentOffsetWidth / 2),
+            47 + Y
+        )
         self.LeftArrow:Position(7.5 + ParentOffsetX + (ParentOffsetWidth / 2), 15 + Y)
         self.RightArrow:Position(393.5 + ParentOffsetX + (ParentOffsetWidth / 2), 15 + Y)
         self.Text:Position(215.5 + ParentOffsetX + (ParentOffsetWidth / 2), 15 + Y)
@@ -2116,18 +2641,32 @@ function UIMenuColourPanel:UpdateParent(Colour)
         if PanelItemIndex then
             self.ParentItem.Items[PanelItemIndex].Value[PanelIndex] = Colour
             self.ParentItem:Index(PanelItemIndex)
-            self.ParentItem.Base.ParentMenu.OnListChange(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
+            self.ParentItem.Base.ParentMenu.OnListChange(
+                self.ParentItem.Base.ParentMenu,
+                self.ParentItem,
+                self.ParentItem._Index
+            )
             self.ParentItem.OnListChanged(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
         else
             for Index = 1, #self.ParentItem.Items do
                 if type(self.ParentItem.Items[Index]) == "table" then
-                    if not self.ParentItem.Items[Index].Panels then self.ParentItem.Items[Index].Panels = {} end
+                    if not self.ParentItem.Items[Index].Panels then
+                        self.ParentItem.Items[Index].Panels = {}
+                    end
                     self.ParentItem.Items[Index].Panels[PanelIndex] = Colour
                 else
-                    self.ParentItem.Items[Index] = { Name = tostring(self.ParentItem.Items[Index]), Value = self.ParentItem.Items[Index], Panels = { [PanelIndex] = Colour } }
+                    self.ParentItem.Items[Index] = {
+                        Name = tostring(self.ParentItem.Items[Index]),
+                        Value = self.ParentItem.Items[Index],
+                        Panels = {[PanelIndex] = Colour}
+                    }
                 end
             end
-            self.ParentItem.Base.ParentMenu.OnListChange(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
+            self.ParentItem.Base.ParentMenu.OnListChange(
+                self.ParentItem.Base.ParentMenu,
+                self.ParentItem,
+                self.ParentItem._Index
+            )
             self.ParentItem.OnListChanged(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
         end
     elseif ParentType == "UIMenuItem" then
@@ -2140,7 +2679,10 @@ function UIMenuColourPanel:UpdateSelection(PreventUpdate)
     if not PreventUpdate then
         self:UpdateParent(CurrentSelection)
     end
-    self.SelectedRectangle:Position(15 + (44.5 * ((CurrentSelection - self.Data.Pagination.Min) - 1)) + self.ParentItem:Offset().X, self.SelectedRectangle.Y)
+    self.SelectedRectangle:Position(
+        15 + (44.5 * ((CurrentSelection - self.Data.Pagination.Min) - 1)) + self.ParentItem:Offset().X,
+        self.SelectedRectangle.Y
+    )
     for Index = 1, 9 do
         self.Bar[Index]:Colour(table.unpack(self.Data.Items[self.Data.Pagination.Min + Index]))
     end
@@ -2148,14 +2690,19 @@ function UIMenuColourPanel:UpdateSelection(PreventUpdate)
 end
 
 function UIMenuColourPanel:Functions()
-
-    local SafeZone = { X = 0, Y = 0 }
+    local SafeZone = {X = 0, Y = 0}
     if self.ParentItem:SetParentMenu().Settings.ScaleWithSafezone then
         SafeZone = GetSafeZoneBounds()
     end
 
-
-    if IsMouseInBounds(self.LeftArrow.X + SafeZone.X, self.LeftArrow.Y + SafeZone.Y, self.LeftArrow.Width, self.LeftArrow.Height) then
+    if
+        IsMouseInBounds(
+            self.LeftArrow.X + SafeZone.X,
+            self.LeftArrow.Y + SafeZone.Y,
+            self.LeftArrow.Width,
+            self.LeftArrow.Height
+        )
+     then
         if IsDisabledControlJustPressed(0, 24) then
             if #self.Data.Items > self.Data.Pagination.Total + 1 then
                 if self:CurrentSelection() <= self.Data.Pagination.Min + 1 then
@@ -2182,7 +2729,14 @@ function UIMenuColourPanel:Functions()
         end
     end
 
-    if IsMouseInBounds(self.RightArrow.X + SafeZone.X, self.RightArrow.Y + SafeZone.Y, self.RightArrow.Width, self.RightArrow.Height) then
+    if
+        IsMouseInBounds(
+            self.RightArrow.X + SafeZone.X,
+            self.RightArrow.Y + SafeZone.Y,
+            self.RightArrow.Width,
+            self.RightArrow.Height
+        )
+     then
         if IsDisabledControlJustPressed(0, 24) then
             if #self.Data.Items > self.Data.Pagination.Total + 1 then
                 if self:CurrentSelection() >= self.Data.Pagination.Max then
@@ -2209,7 +2763,14 @@ function UIMenuColourPanel:Functions()
     end
 
     for Index = 1, #self.Bar do
-        if IsMouseInBounds(self.Bar[Index].X + SafeZone.X, self.Bar[Index].Y + SafeZone.Y, self.Bar[Index].Width, self.Bar[Index].Height) then
+        if
+            IsMouseInBounds(
+                self.Bar[Index].X + SafeZone.X,
+                self.Bar[Index].Y + SafeZone.Y,
+                self.Bar[Index].Width,
+                self.Bar[Index].Height
+            )
+         then
             if IsDisabledControlJustPressed(0, 24) then
                 self:CurrentSelection(self.Data.Pagination.Min + Index - 1)
             end
@@ -2237,15 +2798,16 @@ end
     UIMenuPercentagePanel.lua
     Panels
 --]]
-
 UIMenuPercentagePanel = setmetatable({}, UIMenuPercentagePanel)
 UIMenuPercentagePanel.__index = UIMenuPercentagePanel
-UIMenuPercentagePanel.__call = function() return "UIMenuPanel", "UIMenuPercentagePanel" end
+UIMenuPercentagePanel.__call = function()
+    return "UIMenuPanel", "UIMenuPercentagePanel"
+end
 
 function UIMenuPercentagePanel.New(MinText, MaxText)
     _UIMenuPercentagePanel = {
         Data = {
-            Enabled = true,
+            Enabled = true
         },
         Background = Sprite.New("commonmenu", "gradient_bgd", 0, 0, 431, 76),
         ActiveBar = UIResRectangle.New(0, 0, 413, 10, 245, 245, 245, 255),
@@ -2253,10 +2815,10 @@ function UIMenuPercentagePanel.New(MinText, MaxText)
         Text = {
             Min = UIResText.New(MinText or "0%", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
             Max = UIResText.New("100%", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
-            Title = UIResText.New(MaxText or "Opacity", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre"),
+            Title = UIResText.New(MaxText or "Opacity", 0, 0, 0.35, 255, 255, 255, 255, 0, "Centre")
         },
-        Audio = { Slider = "CONTINUOUS_SLIDER", Library = "HUD_FRONTEND_DEFAULT_SOUNDSET", Id = nil },
-        ParentItem = nil,
+        Audio = {Slider = "CONTINUOUS_SLIDER", Library = "HUD_FRONTEND_DEFAULT_SOUNDSET", Id = nil},
+        ParentItem = nil
     }
 
     return setmetatable(_UIMenuPercentagePanel, UIMenuPercentagePanel)
@@ -2295,13 +2857,17 @@ function UIMenuPercentagePanel:Percentage(Value)
         local Percent = ((Value < 0.0) and 0.0) or ((Value > 1.0) and 1.0 or Value)
         self.ActiveBar:Size(self.BackgroundBar.Width * Percent, self.ActiveBar.Height)
     else
-        local SafeZone = { X = 0, Y = 0 }
+        local SafeZone = {X = 0, Y = 0}
         if self.ParentItem:SetParentMenu().Settings.ScaleWithSafezone then
             SafeZone = GetSafeZoneBounds()
         end
 
         local Progress = (math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X) - self.ActiveBar.X
-        return math.round(((Progress >= 0 and Progress <= 413) and Progress or ((Progress < 0) and 0 or 413)) / self.BackgroundBar.Width, 2)
+        return math.round(
+            ((Progress >= 0 and Progress <= 413) and Progress or ((Progress < 0) and 0 or 413)) /
+                self.BackgroundBar.Width,
+            2
+        )
     end
 end
 
@@ -2312,19 +2878,33 @@ function UIMenuPercentagePanel:UpdateParent(Percentage)
         if PanelItemIndex then
             self.ParentItem.Items[PanelItemIndex].Value[self.ParentItem:FindPanelIndex(self)] = Percentage
             self.ParentItem:Index(PanelItemIndex)
-            self.ParentItem.Base.ParentMenu.OnListChange(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
+            self.ParentItem.Base.ParentMenu.OnListChange(
+                self.ParentItem.Base.ParentMenu,
+                self.ParentItem,
+                self.ParentItem._Index
+            )
             self.ParentItem.OnListChanged(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
         else
             local PanelIndex = self.ParentItem:FindPanelIndex(self)
             for Index = 1, #self.ParentItem.Items do
                 if type(self.ParentItem.Items[Index]) == "table" then
-                    if not self.ParentItem.Items[Index].Panels then self.ParentItem.Items[Index].Panels = {} end
+                    if not self.ParentItem.Items[Index].Panels then
+                        self.ParentItem.Items[Index].Panels = {}
+                    end
                     self.ParentItem.Items[Index].Panels[PanelIndex] = Percentage
                 else
-                    self.ParentItem.Items[Index] = { Name = tostring(self.ParentItem.Items[Index]), Value = self.ParentItem.Items[Index], Panels = { [PanelIndex] = Percentage } }
+                    self.ParentItem.Items[Index] = {
+                        Name = tostring(self.ParentItem.Items[Index]),
+                        Value = self.ParentItem.Items[Index],
+                        Panels = {[PanelIndex] = Percentage}
+                    }
                 end
             end
-            self.ParentItem.Base.ParentMenu.OnListChange(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
+            self.ParentItem.Base.ParentMenu.OnListChange(
+                self.ParentItem.Base.ParentMenu,
+                self.ParentItem,
+                self.ParentItem._Index
+            )
             self.ParentItem.OnListChanged(self.ParentItem.Base.ParentMenu, self.ParentItem, self.ParentItem._Index)
         end
     elseif ParentType == "UIMenuItem" then
@@ -2333,35 +2913,68 @@ function UIMenuPercentagePanel:UpdateParent(Percentage)
 end
 
 function UIMenuPercentagePanel:Functions()
-
-    local SafeZone = { X = 0, Y = 0 }
+    local SafeZone = {X = 0, Y = 0}
     if self.ParentItem:SetParentMenu().Settings.ScaleWithSafezone then
         SafeZone = GetSafeZoneBounds()
     end
 
-    if IsMouseInBounds(self.BackgroundBar.X + SafeZone.X, self.BackgroundBar.Y - 4 + SafeZone.Y, self.BackgroundBar.Width, self.BackgroundBar.Height + 8) then
+    if
+        IsMouseInBounds(
+            self.BackgroundBar.X + SafeZone.X,
+            self.BackgroundBar.Y - 4 + SafeZone.Y,
+            self.BackgroundBar.Width,
+            self.BackgroundBar.Height + 8
+        )
+     then
         if IsDisabledControlJustPressed(0, 24) then
             if not self.Pressed then
                 self.Pressed = true
-                Citizen.CreateThread(function()
-                    self.Audio.Id = GetSoundId()
-                    PlaySoundFrontend(self.Audio.Id, self.Audio.Slider, self.Audio.Library, 1)
-                    while IsDisabledControlPressed(0, 24) and IsMouseInBounds(self.BackgroundBar.X + SafeZone.X, self.BackgroundBar.Y - 4 + SafeZone.Y, self.BackgroundBar.Width, self.BackgroundBar.Height + 8) do
-                        Citizen.Wait(0)
-                        local Progress = (math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X) - self.ActiveBar.X
-                        self.ActiveBar:Size(((Progress >= 0 and Progress <= 413) and Progress or ((Progress < 0) and 0 or 413)), self.ActiveBar.Height)
+                Citizen.CreateThread(
+                    function()
+                        self.Audio.Id = GetSoundId()
+                        PlaySoundFrontend(self.Audio.Id, self.Audio.Slider, self.Audio.Library, 1)
+                        while IsDisabledControlPressed(0, 24) and
+                            IsMouseInBounds(
+                                self.BackgroundBar.X + SafeZone.X,
+                                self.BackgroundBar.Y - 4 + SafeZone.Y,
+                                self.BackgroundBar.Width,
+                                self.BackgroundBar.Height + 8
+                            ) do
+                            Citizen.Wait(0)
+                            local Progress =
+                                (math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X) - self.ActiveBar.X
+                            self.ActiveBar:Size(
+                                ((Progress >= 0 and Progress <= 413) and Progress or ((Progress < 0) and 0 or 413)),
+                                self.ActiveBar.Height
+                            )
+                        end
+                        StopSound(self.Audio.Id)
+                        ReleaseSoundId(self.Audio.Id)
+                        self.Pressed = false
                     end
-                    StopSound(self.Audio.Id)
-                    ReleaseSoundId(self.Audio.Id)
-                    self.Pressed = false
-                end)
-                Citizen.CreateThread(function()
-                    while IsDisabledControlPressed(0, 24) and IsMouseInBounds(self.BackgroundBar.X + SafeZone.X, self.BackgroundBar.Y - 4 + SafeZone.Y, self.BackgroundBar.Width, self.BackgroundBar.Height + 8) do
-                        Citizen.Wait(75)
-                        local Progress = (math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X) - self.ActiveBar.X
-                        self:UpdateParent(math.round(((Progress >= 0 and Progress <= 413) and Progress or ((Progress < 0) and 0 or 413)) / self.BackgroundBar.Width, 2))
+                )
+                Citizen.CreateThread(
+                    function()
+                        while IsDisabledControlPressed(0, 24) and
+                            IsMouseInBounds(
+                                self.BackgroundBar.X + SafeZone.X,
+                                self.BackgroundBar.Y - 4 + SafeZone.Y,
+                                self.BackgroundBar.Width,
+                                self.BackgroundBar.Height + 8
+                            ) do
+                            Citizen.Wait(75)
+                            local Progress =
+                                (math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X) - self.ActiveBar.X
+                            self:UpdateParent(
+                                math.round(
+                                    ((Progress >= 0 and Progress <= 413) and Progress or ((Progress < 0) and 0 or 413)) /
+                                        self.BackgroundBar.Width,
+                                    2
+                                )
+                            )
+                        end
                     end
-                end)
+                )
             end
         end
     end
@@ -2384,22 +2997,37 @@ end
     UIMenu.lua
     Menus
 --]]
-
 function UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName)
     local X, Y = tonumber(X) or 0, tonumber(Y) or 0
-    if Title ~= nil then Title = tostring(Title) or "" else Title = "" end
-    if Subtitle ~= nil then Subtitle = tostring(Subtitle) or "" else Subtitle = "" end
-    if TxtDictionary ~= nil then TxtDictionary = tostring(TxtDictionary) or "commonmenu" else TxtDictionary = "commonmenu" end
-    if TxtName ~= nil then TxtName = tostring(TxtName) or "interaction_bgd" else TxtName = "interaction_bgd" end
+    if Title ~= nil then
+        Title = tostring(Title) or ""
+    else
+        Title = ""
+    end
+    if Subtitle ~= nil then
+        Subtitle = tostring(Subtitle) or ""
+    else
+        Subtitle = ""
+    end
+    if TxtDictionary ~= nil then
+        TxtDictionary = tostring(TxtDictionary) or "commonmenu"
+    else
+        TxtDictionary = "commonmenu"
+    end
+    if TxtName ~= nil then
+        TxtName = tostring(TxtName) or "interaction_bgd"
+    else
+        TxtName = "interaction_bgd"
+    end
     local _UIMenu = {
         Logo = Sprite.New(TxtDictionary, TxtName, 0 + X, 0 + Y, 431, 107),
         Banner = nil,
         Title = UIResText.New(Title, 215 + X, 20 + Y, 1.15, 255, 255, 255, 255, 1, 1),
-        Subtitle = { ExtraY = 0 },
+        Subtitle = {ExtraY = 0},
         WidthOffset = 0,
-        Position = { X = X, Y = Y },
-        Pagination = { Min = 0, Max = 9, Total = 9 },
-        PageCounter = { PreText = "" },
+        Position = {X = X, Y = Y},
+        Pagination = {Min = 0, Max = 9, Total = 9},
+        PageCounter = {PreText = ""},
         Extra = {},
         Description = {},
         Items = {},
@@ -2407,46 +3035,57 @@ function UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName)
         Children = {},
         Controls = {
             Back = {
-                Enabled = true,
+                Enabled = true
             },
             Select = {
-                Enabled = true,
+                Enabled = true
             },
             Left = {
-                Enabled = true,
+                Enabled = true
             },
             Right = {
-                Enabled = true,
+                Enabled = true
             },
             Up = {
-                Enabled = true,
+                Enabled = true
             },
             Down = {
-                Enabled = true,
+                Enabled = true
             },
             Increment = {
-                Enabled = true,
+                Enabled = true
             }
         },
         ParentMenu = nil,
         ParentItem = nil,
         _Visible = false,
         ActiveItem = 1000,
-        Dirty = false;
+        Dirty = false,
         ReDraw = true,
         InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS"),
         InstructionalButtons = {},
-        OnIndexChange = function(menu, newindex) end,
-        OnListChange = function(menu, list, newindex) end,
-        OnSliderChange = function(menu, slider, newindex) end,
-        OnProgressChange = function(menu, progress, newindex) end,
-        OnCheckboxChange = function(menu, item, checked) end,
-        OnListSelect = function(menu, list, index) end,
-        OnSliderSelect = function(menu, slider, index) end,
-        OnProgressSelect = function(menu, progress, index) end,
-        OnItemSelect = function(menu, item, index) end,
-        OnMenuChanged = function(menu, newmenu, forward) end,
-        OnMenuClosed = function(menu) end,
+        OnIndexChange = function(menu, newindex)
+        end,
+        OnListChange = function(menu, list, newindex)
+        end,
+        OnSliderChange = function(menu, slider, newindex)
+        end,
+        OnProgressChange = function(menu, progress, newindex)
+        end,
+        OnCheckboxChange = function(menu, item, checked)
+        end,
+        OnListSelect = function(menu, list, index)
+        end,
+        OnSliderSelect = function(menu, slider, index)
+        end,
+        OnProgressSelect = function(menu, progress, index)
+        end,
+        OnItemSelect = function(menu, item, index)
+        end,
+        OnMenuChanged = function(menu, newmenu, forward)
+        end,
+        OnMenuClosed = function(menu)
+        end,
         Settings = {
             InstructionalButtons = true,
             MultilineFormats = true,
@@ -2461,97 +3100,138 @@ function UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName)
                 LeftRight = "NAV_LEFT_RIGHT",
                 Select = "SELECT",
                 Back = "BACK",
-                Error = "ERROR",
+                Error = "ERROR"
             },
             EnabledControls = {
                 Controller = {
-                    { 0, 2 }, -- Look Up and Down
-                    { 0, 1 }, -- Look Left and Right
-                    { 0, 25 }, -- Aim
-                    { 0, 24 }, -- Attack
+                    {0, 2}, -- Look Up and Down
+                    {0, 1}, -- Look Left and Right
+                    {0, 25}, -- Aim
+                    {0, 24} -- Attack
                 },
                 Keyboard = {
-                    { 0, 0 }, -- Camera
-                    { 0, 1 }, -- Look Left and Right
-                    { 0, 2 }, -- Look Up and Down
-                    { 0, 8 }, -- Fly Up and Down
-                    { 0, 9 }, -- Fly Left and Right
-                    { 0, 21 }, -- Sprint
-                    { 0, 22 }, -- Jump
-                    { 0, 23 }, -- Enter
-                    { 0, 24 }, -- Attack
-                    { 0, 25 }, -- Aim
-                    { 0, 26 }, -- C
-                    { 0, 30 }, -- Move Left and Right
-                    { 0, 31 }, -- Move Up and Down
-                    { 0, 47 }, -- G
-                    { 0, 59 }, -- Move Vehicle Left and Right
-                    { 0, 71 }, -- Accelerate Vehicle
-                    { 0, 72 }, -- Vehicle Brake
-                    { 0, 73 }, -- X
-                    { 0, 75 }, -- Exit Vehicle
-                    { 0, 76 }, -- Vehicle Handbrake
-                    { 0, 89 }, -- Fly Yaw Left
-                    { 0, 90 }, -- Fly Yaw Right
-                    { 0, 108 }, -- Num Pad 4
-                    { 0, 109 }, -- Num Pad 6
-                    { 0, 110 }, -- Num Pad 5
-                    { 0, 111 }, -- Num Pad 8
-                    { 0, 117 }, -- Num Pad 7
-                    { 0, 118 }, -- Num Pad 9
-                    { 0, 171 }, -- CAPSLOCK
-                    { 0, 187 }, -- Down
-                    { 0, 188 }, -- Up
-                    { 0, 189 }, -- Left
-                    { 0, 190 }, -- Right
-                    { 0, 195 }, -- X axis
-                    { 0, 196 }, -- Y axis
-                    { 0, 201 }, -- Select
-                    { 0, 202 }, -- Back
-                    { 0, 203 }, -- Spacebar?
-                    { 0, 217 }, -- Select
-                    { 0, 239 }, -- Cursor X
-                    { 0, 240 }, -- Cursor Y
-                    { 0, 241 }, -- Scroll up
-                    { 0, 242 }, -- Scroll down
-                    { 0, 249 }, -- N
-                    { 0, 305 }, -- B
-                    { 0, 306 }, -- N
-                },
+                    {0, 0}, -- Camera
+                    {0, 1}, -- Look Left and Right
+                    {0, 2}, -- Look Up and Down
+                    {0, 8}, -- Fly Up and Down
+                    {0, 9}, -- Fly Left and Right
+                    {0, 21}, -- Sprint
+                    {0, 22}, -- Jump
+                    {0, 23}, -- Enter
+                    {0, 24}, -- Attack
+                    {0, 25}, -- Aim
+                    {0, 26}, -- C
+                    {0, 30}, -- Move Left and Right
+                    {0, 31}, -- Move Up and Down
+                    {0, 47}, -- G
+                    {0, 59}, -- Move Vehicle Left and Right
+                    {0, 71}, -- Accelerate Vehicle
+                    {0, 72}, -- Vehicle Brake
+                    {0, 73}, -- X
+                    {0, 75}, -- Exit Vehicle
+                    {0, 76}, -- Vehicle Handbrake
+                    {0, 89}, -- Fly Yaw Left
+                    {0, 90}, -- Fly Yaw Right
+                    {0, 108}, -- Num Pad 4
+                    {0, 109}, -- Num Pad 6
+                    {0, 110}, -- Num Pad 5
+                    {0, 111}, -- Num Pad 8
+                    {0, 117}, -- Num Pad 7
+                    {0, 118}, -- Num Pad 9
+                    {0, 171}, -- CAPSLOCK
+                    {0, 187}, -- Down
+                    {0, 188}, -- Up
+                    {0, 189}, -- Left
+                    {0, 190}, -- Right
+                    {0, 195}, -- X axis
+                    {0, 196}, -- Y axis
+                    {0, 201}, -- Select
+                    {0, 202}, -- Back
+                    {0, 203}, -- Spacebar?
+                    {0, 217}, -- Select
+                    {0, 239}, -- Cursor X
+                    {0, 240}, -- Cursor Y
+                    {0, 241}, -- Scroll up
+                    {0, 242}, -- Scroll down
+                    {0, 249}, -- N
+                    {0, 305}, -- B
+                    {0, 306} -- N
+                }
             }
         }
     }
 
     if Subtitle ~= "" and Subtitle ~= nil then
-        _UIMenu.Subtitle.Rectangle = UIResRectangle.New(0 + _UIMenu.Position.X, 107 + _UIMenu.Position.Y, 431, 37, 0, 0, 0, 255)
-        _UIMenu.Subtitle.Text = UIResText.New(Subtitle, 8 + _UIMenu.Position.X, 110 + _UIMenu.Position.Y, 0.35, 245, 245, 245, 255, 0)
+        _UIMenu.Subtitle.Rectangle =
+            UIResRectangle.New(0 + _UIMenu.Position.X, 107 + _UIMenu.Position.Y, 431, 37, 0, 0, 0, 255)
+        _UIMenu.Subtitle.Text =
+            UIResText.New(Subtitle, 8 + _UIMenu.Position.X, 110 + _UIMenu.Position.Y, 0.35, 245, 245, 245, 255, 0)
         _UIMenu.Subtitle.BackupText = Subtitle
         _UIMenu.Subtitle.Formatted = false
         if string.starts(Subtitle, "~") then
             _UIMenu.PageCounter.PreText = string.sub(Subtitle, 1, 3)
         end
-        _UIMenu.PageCounter.Text = UIResText.New("", 425 + _UIMenu.Position.X, 110 + _UIMenu.Position.Y, 0.35, 245, 245, 245, 255, 0, "Right")
+        _UIMenu.PageCounter.Text =
+            UIResText.New("", 425 + _UIMenu.Position.X, 110 + _UIMenu.Position.Y, 0.35, 245, 245, 245, 255, 0, "Right")
         _UIMenu.Subtitle.ExtraY = 37
     end
 
-    _UIMenu.ArrowSprite = Sprite.New("commonmenu", "shop_arrows_upanddown", 190 + _UIMenu.Position.X, 147 + 37 * (_UIMenu.Pagination.Total + 1) + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY, 50, 50)
-    _UIMenu.Extra.Up = UIResRectangle.New(0 + _UIMenu.Position.X, 144 + 38 * (_UIMenu.Pagination.Total + 1) + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY, 431, 18, 0, 0, 0, 200)
-    _UIMenu.Extra.Down = UIResRectangle.New(0 + _UIMenu.Position.X, 144 + 18 + 38 * (_UIMenu.Pagination.Total + 1) + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY, 431, 18, 0, 0, 0, 200)
+    _UIMenu.ArrowSprite =
+        Sprite.New(
+        "commonmenu",
+        "shop_arrows_upanddown",
+        190 + _UIMenu.Position.X,
+        147 + 37 * (_UIMenu.Pagination.Total + 1) + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY,
+        50,
+        50
+    )
+    _UIMenu.Extra.Up =
+        UIResRectangle.New(
+        0 + _UIMenu.Position.X,
+        144 + 38 * (_UIMenu.Pagination.Total + 1) + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY,
+        431,
+        18,
+        0,
+        0,
+        0,
+        200
+    )
+    _UIMenu.Extra.Down =
+        UIResRectangle.New(
+        0 + _UIMenu.Position.X,
+        144 + 18 + 38 * (_UIMenu.Pagination.Total + 1) + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY,
+        431,
+        18,
+        0,
+        0,
+        0,
+        200
+    )
 
     _UIMenu.Description.Bar = UIResRectangle.New(_UIMenu.Position.X, 123, 431, 4, 0, 0, 0, 255)
     _UIMenu.Description.Rectangle = Sprite.New("commonmenu", "gradient_bgd", _UIMenu.Position.X, 127, 431, 30)
     _UIMenu.Description.Text = UIResText.New("Description", _UIMenu.Position.X + 5, 125, 0.35)
 
-    _UIMenu.Background = Sprite.New("commonmenu", "gradient_bgd", _UIMenu.Position.X, 144 + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY, 290, 25)
+    _UIMenu.Background =
+        Sprite.New(
+        "commonmenu",
+        "gradient_bgd",
+        _UIMenu.Position.X,
+        144 + _UIMenu.Position.Y - 37 + _UIMenu.Subtitle.ExtraY,
+        290,
+        25
+    )
 
-    Citizen.CreateThread(function()
-        if not HasScaleformMovieLoaded(_UIMenu.InstructionalScaleform) then
-            _UIMenu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
-            while not HasScaleformMovieLoaded(_UIMenu.InstructionalScaleform) do
-                Citizen.Wait(0)
+    Citizen.CreateThread(
+        function()
+            if not HasScaleformMovieLoaded(_UIMenu.InstructionalScaleform) then
+                _UIMenu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
+                while not HasScaleformMovieLoaded(_UIMenu.InstructionalScaleform) do
+                    Citizen.Wait(0)
+                end
             end
         end
-    end)
+    )
     return setmetatable(_UIMenu, UIMenu)
 end
 
@@ -2582,11 +3262,19 @@ function UIMenu:DisEnableControls(bool)
     else
         if Controller() then
             for Index = 1, #self.Settings.EnabledControls.Controller do
-                EnableControlAction(self.Settings.EnabledControls.Controller[Index][1], self.Settings.EnabledControls.Controller[Index][2], true)
+                EnableControlAction(
+                    self.Settings.EnabledControls.Controller[Index][1],
+                    self.Settings.EnabledControls.Controller[Index][2],
+                    true
+                )
             end
         else
             for Index = 1, #self.Settings.EnabledControls.Keyboard do
-                EnableControlAction(self.Settings.EnabledControls.Keyboard[Index][1], self.Settings.EnabledControls.Keyboard[Index][2], true)
+                EnableControlAction(
+                    self.Settings.EnabledControls.Keyboard[Index][1],
+                    self.Settings.EnabledControls.Keyboard[Index][2],
+                    true
+                )
             end
         end
     end
@@ -2697,9 +3385,21 @@ function UIMenu:RecalculateDescriptionPosition()
     self.Description.Bar:Size(431 + self.WidthOffset, 4)
     self.Description.Rectangle:Size(431 + self.WidthOffset, 30)
 
-    self.Description.Bar:Position(self.Position.X, self:CalculateItemHeight() + ((#self.Items > (self.Pagination.Total + 1)) and 37 or 0) + self.Description.Bar:Position().Y)
-    self.Description.Rectangle:Position(self.Position.X, self:CalculateItemHeight() + ((#self.Items > (self.Pagination.Total + 1)) and 37 or 0) + self.Description.Rectangle:Position().Y)
-    self.Description.Text:Position(self.Position.X + 8, self:CalculateItemHeight() + ((#self.Items > (self.Pagination.Total + 1)) and 37 or 0) + self.Description.Text:Position().Y)
+    self.Description.Bar:Position(
+        self.Position.X,
+        self:CalculateItemHeight() + ((#self.Items > (self.Pagination.Total + 1)) and 37 or 0) +
+            self.Description.Bar:Position().Y
+    )
+    self.Description.Rectangle:Position(
+        self.Position.X,
+        self:CalculateItemHeight() + ((#self.Items > (self.Pagination.Total + 1)) and 37 or 0) +
+            self.Description.Rectangle:Position().Y
+    )
+    self.Description.Text:Position(
+        self.Position.X + 8,
+        self:CalculateItemHeight() + ((#self.Items > (self.Pagination.Total + 1)) and 37 or 0) +
+            self.Description.Text:Position().Y
+    )
 end
 
 function UIMenu:CaclulatePanelPosition(HasDescription)
@@ -2781,7 +3481,6 @@ end
 
 function UIMenu:MultilineFormat(str)
     if tostring(str) then
-
         local PixelPerLine = 425 + self.WidthOffset
         local AggregatePixels = 0
         local output = ""
@@ -2821,7 +3520,10 @@ function UIMenu:DrawCalculations()
         self.Subtitle.Text:Text(self.Subtitle.BackupText)
     end
 
-    self.Background:Size(431 + self.WidthOffset, self:CalculateItemHeight() + WindowHeight + ((self.Subtitle.ExtraY > 0) and 0 or 37))
+    self.Background:Size(
+        431 + self.WidthOffset,
+        self:CalculateItemHeight() + WindowHeight + ((self.Subtitle.ExtraY > 0) and 0 or 37)
+    )
 
     self.Extra.Up:Size(431 + self.WidthOffset, 18)
     self.Extra.Down:Size(431 + self.WidthOffset, 18)
@@ -2830,9 +3532,15 @@ function UIMenu:DrawCalculations()
     self.Extra.Down:Position(self.Position.X, 144 + 18 + self:CalculateItemHeight() + self.Position.Y + WindowHeight)
 
     if self.WidthOffset > 0 then
-        self.ArrowSprite:Position(190 + self.Position.X + (self.WidthOffset / 2), 137 + self:CalculateItemHeight() + self.Position.Y + WindowHeight)
+        self.ArrowSprite:Position(
+            190 + self.Position.X + (self.WidthOffset / 2),
+            137 + self:CalculateItemHeight() + self.Position.Y + WindowHeight
+        )
     else
-        self.ArrowSprite:Position(190 + self.Position.X + self.WidthOffset, 137 + self:CalculateItemHeight() + self.Position.Y + WindowHeight)
+        self.ArrowSprite:Position(
+            190 + self.Position.X + self.WidthOffset,
+            137 + self:CalculateItemHeight() + self.Position.Y + WindowHeight
+        )
     end
 
     self.ReDraw = false
@@ -2883,11 +3591,22 @@ function UIMenu:ProcessControl()
         return
     end
 
-    if self.Controls.Back.Enabled and (IsDisabledControlJustReleased(0, 177) or IsDisabledControlJustReleased(1, 177) or IsDisabledControlJustReleased(2, 177) or IsDisabledControlJustReleased(0, 199) or IsDisabledControlJustReleased(1, 199) or IsDisabledControlJustReleased(2, 199)) then
+    if
+        self.Controls.Back.Enabled and
+            (IsDisabledControlJustReleased(0, 177) or IsDisabledControlJustReleased(1, 177) or
+                IsDisabledControlJustReleased(2, 177) or
+                IsDisabledControlJustReleased(0, 199) or
+                IsDisabledControlJustReleased(1, 199) or
+                IsDisabledControlJustReleased(2, 199))
+     then
         self:GoBack()
     end
 
-    if self.Controls.Increment.Enabled and (IsDisabledControlJustReleased(0, 19) or IsDisabledControlJustReleased(1, 19) or IsDisabledControlJustReleased(2, 19)) then
+    if
+        self.Controls.Increment.Enabled and
+            (IsDisabledControlJustReleased(0, 19) or IsDisabledControlJustReleased(1, 19) or
+                IsDisabledControlJustReleased(2, 19))
+     then
         if paginationValue == 1 then
             paginationValue = 10
         else
@@ -2901,86 +3620,136 @@ function UIMenu:ProcessControl()
     end
 
     if not self.UpPressed then
-        if self.Controls.Up.Enabled and (IsDisabledControlJustPressed(0, 172) or IsDisabledControlJustPressed(1, 172) or IsDisabledControlJustPressed(2, 172) or IsDisabledControlJustPressed(0, 241) or IsDisabledControlJustPressed(1, 241) or IsDisabledControlJustPressed(2, 241) or IsDisabledControlJustPressed(2, 241)) then
+        if
+            self.Controls.Up.Enabled and
+                (IsDisabledControlJustPressed(0, 172) or IsDisabledControlJustPressed(1, 172) or
+                    IsDisabledControlJustPressed(2, 172) or
+                    IsDisabledControlJustPressed(0, 241) or
+                    IsDisabledControlJustPressed(1, 241) or
+                    IsDisabledControlJustPressed(2, 241) or
+                    IsDisabledControlJustPressed(2, 241))
+         then
             self.UpPressed = true
-            Citizen.CreateThread(function()
-                if #self.Items > self.Pagination.Total + 1 then
-                    self:GoUpOverflow()
-                else
-                    self:GoUp()
-                end
-                self:UpdateScaleform()
-                Citizen.Wait(120)
-                while self.Controls.Up.Enabled and (IsDisabledControlPressed(0, 172) or IsDisabledControlPressed(1, 172) or IsDisabledControlPressed(2, 172) or IsDisabledControlPressed(0, 241) or IsDisabledControlPressed(1, 241) or IsDisabledControlPressed(2, 241) or IsDisabledControlPressed(2, 241)) do
+            Citizen.CreateThread(
+                function()
                     if #self.Items > self.Pagination.Total + 1 then
                         self:GoUpOverflow()
                     else
                         self:GoUp()
                     end
                     self:UpdateScaleform()
-                    Citizen.Wait(50)
+                    Citizen.Wait(120)
+                    while self.Controls.Up.Enabled and
+                        (IsDisabledControlPressed(0, 172) or IsDisabledControlPressed(1, 172) or
+                            IsDisabledControlPressed(2, 172) or
+                            IsDisabledControlPressed(0, 241) or
+                            IsDisabledControlPressed(1, 241) or
+                            IsDisabledControlPressed(2, 241) or
+                            IsDisabledControlPressed(2, 241)) do
+                        if #self.Items > self.Pagination.Total + 1 then
+                            self:GoUpOverflow()
+                        else
+                            self:GoUp()
+                        end
+                        self:UpdateScaleform()
+                        Citizen.Wait(50)
+                    end
+                    self.UpPressed = false
                 end
-                self.UpPressed = false
-            end)
+            )
         end
     end
 
     if not self.DownPressed then
-        if self.Controls.Down.Enabled and (IsDisabledControlJustPressed(0, 173) or IsDisabledControlJustPressed(1, 173) or IsDisabledControlJustPressed(2, 173) or IsDisabledControlJustPressed(0, 242) or IsDisabledControlJustPressed(1, 242) or IsDisabledControlJustPressed(2, 242)) then
+        if
+            self.Controls.Down.Enabled and
+                (IsDisabledControlJustPressed(0, 173) or IsDisabledControlJustPressed(1, 173) or
+                    IsDisabledControlJustPressed(2, 173) or
+                    IsDisabledControlJustPressed(0, 242) or
+                    IsDisabledControlJustPressed(1, 242) or
+                    IsDisabledControlJustPressed(2, 242))
+         then
             self.DownPressed = true
-            Citizen.CreateThread(function()
-                if #self.Items > self.Pagination.Total + 1 then
-                    self:GoDownOverflow()
-                else
-                    self:GoDown()
-                end
-                self:UpdateScaleform()
-                Citizen.Wait(120)
-                while self.Controls.Down.Enabled and (IsDisabledControlPressed(0, 173) or IsDisabledControlPressed(1, 173) or IsDisabledControlPressed(2, 173) or IsDisabledControlPressed(0, 242) or IsDisabledControlPressed(1, 242) or IsDisabledControlPressed(2, 242)) do
+            Citizen.CreateThread(
+                function()
                     if #self.Items > self.Pagination.Total + 1 then
                         self:GoDownOverflow()
                     else
                         self:GoDown()
                     end
                     self:UpdateScaleform()
-                    Citizen.Wait(50)
+                    Citizen.Wait(120)
+                    while self.Controls.Down.Enabled and
+                        (IsDisabledControlPressed(0, 173) or IsDisabledControlPressed(1, 173) or
+                            IsDisabledControlPressed(2, 173) or
+                            IsDisabledControlPressed(0, 242) or
+                            IsDisabledControlPressed(1, 242) or
+                            IsDisabledControlPressed(2, 242)) do
+                        if #self.Items > self.Pagination.Total + 1 then
+                            self:GoDownOverflow()
+                        else
+                            self:GoDown()
+                        end
+                        self:UpdateScaleform()
+                        Citizen.Wait(50)
+                    end
+                    self.DownPressed = false
                 end
-                self.DownPressed = false
-            end)
+            )
         end
     end
 
     if not self.LeftPressed then
-        if self.Controls.Left.Enabled and (IsDisabledControlPressed(0, 174) or IsDisabledControlPressed(1, 174) or IsDisabledControlPressed(2, 174)) then
+        if
+            self.Controls.Left.Enabled and
+                (IsDisabledControlPressed(0, 174) or IsDisabledControlPressed(1, 174) or
+                    IsDisabledControlPressed(2, 174))
+         then
             self.LeftPressed = true
-            Citizen.CreateThread(function()
-                self:GoLeft()
-                Citizen.Wait(175)
-                while self.Controls.Left.Enabled and (IsDisabledControlPressed(0, 174) or IsDisabledControlPressed(1, 174) or IsDisabledControlPressed(2, 174)) do
+            Citizen.CreateThread(
+                function()
                     self:GoLeft()
-                    Citizen.Wait(125)
+                    Citizen.Wait(175)
+                    while self.Controls.Left.Enabled and
+                        (IsDisabledControlPressed(0, 174) or IsDisabledControlPressed(1, 174) or
+                            IsDisabledControlPressed(2, 174)) do
+                        self:GoLeft()
+                        Citizen.Wait(125)
+                    end
+                    self.LeftPressed = false
                 end
-                self.LeftPressed = false
-            end)
+            )
         end
     end
 
     if not self.RightPressed then
-        if self.Controls.Right.Enabled and (IsDisabledControlPressed(0, 175) or IsDisabledControlPressed(1, 175) or IsDisabledControlPressed(2, 175)) then
+        if
+            self.Controls.Right.Enabled and
+                (IsDisabledControlPressed(0, 175) or IsDisabledControlPressed(1, 175) or
+                    IsDisabledControlPressed(2, 175))
+         then
             self.RightPressed = true
-            Citizen.CreateThread(function()
-                self:GoRight()
-                Citizen.Wait(175)
-                while self.Controls.Right.Enabled and (IsDisabledControlPressed(0, 175) or IsDisabledControlPressed(1, 175) or IsDisabledControlPressed(2, 175)) do
+            Citizen.CreateThread(
+                function()
                     self:GoRight()
-                    Citizen.Wait(125)
+                    Citizen.Wait(175)
+                    while self.Controls.Right.Enabled and
+                        (IsDisabledControlPressed(0, 175) or IsDisabledControlPressed(1, 175) or
+                            IsDisabledControlPressed(2, 175)) do
+                        self:GoRight()
+                        Citizen.Wait(125)
+                    end
+                    self.RightPressed = false
                 end
-                self.RightPressed = false
-            end)
+            )
         end
     end
 
-    if self.Controls.Select.Enabled and (IsDisabledControlJustPressed(0, 201) or IsDisabledControlJustPressed(1, 201) or IsDisabledControlJustPressed(2, 201)) then
+    if
+        self.Controls.Select.Enabled and
+            (IsDisabledControlJustPressed(0, 201) or IsDisabledControlJustPressed(1, 201) or
+                IsDisabledControlJustPressed(2, 201))
+     then
         self:SelectItem()
     end
 end
@@ -3286,7 +4055,8 @@ function UIMenu:Draw()
             local PanelOffset = self:CaclulatePanelPosition(self.Items[CurrentSelection]:Description() ~= "")
             for index = 1, #self.Items[CurrentSelection].Panels do
                 if self.Items[CurrentSelection].Panels[index - 1] then
-                    PanelOffset = PanelOffset + self.Items[CurrentSelection].Panels[index - 1].Background:Size().Height + 5
+                    PanelOffset =
+                        PanelOffset + self.Items[CurrentSelection].Panels[index - 1].Background:Size().Height + 5
                 end
                 self.Items[CurrentSelection].Panels[index]:Position(PanelOffset)
                 self.Items[CurrentSelection].Panels[index]:Draw()
@@ -3332,7 +4102,10 @@ function UIMenu:Draw()
 end
 
 function UIMenu:ProcessMouse()
-    if not self._Visible or self.JustOpened or #self.Items == 0 or tobool(Controller()) or not self.Settings.MouseControlsEnabled then
+    if
+        not self._Visible or self.JustOpened or #self.Items == 0 or tobool(Controller()) or
+            not self.Settings.MouseControlsEnabled
+     then
         EnableControlAction(0, 2, true)
         EnableControlAction(0, 1, true)
         EnableControlAction(0, 25, true)
@@ -3347,7 +4120,7 @@ function UIMenu:ProcessMouse()
         return
     end
 
-    local SafeZone = { X = 0, Y = 0 }
+    local SafeZone = {X = 0, Y = 0}
     local WindowHeight = self:CalculateWindowHeight()
     if self.Settings.ScaleWithSafezone then
         SafeZone = GetSafeZoneBounds()
@@ -3373,7 +4146,9 @@ function UIMenu:ProcessMouse()
     end
 
     for i = self.Pagination.Min + 1, Limit, 1 do
-        local X, Y = self.Position.X + SafeZone.X, self.Position.Y + 144 - 37 + self.Subtitle.ExtraY + ItemOffset + SafeZone.Y + WindowHeight
+        local X, Y =
+            self.Position.X + SafeZone.X,
+            self.Position.Y + 144 - 37 + self.Subtitle.ExtraY + ItemOffset + SafeZone.Y + WindowHeight
         local Item = self.Items[i]
         local Type, SubType = Item()
         local Width, Height = 431 + self.WidthOffset, self:CalculateItemHeightOffset(Item)
@@ -3382,77 +4157,106 @@ function UIMenu:ProcessMouse()
             Item:Hovered(true)
             if not self.Controls.MousePressed then
                 if IsDisabledControlJustPressed(0, 24) then
-                    Citizen.CreateThread(function()
-                        local _X, _Y, _Width, _Height = X, Y, Width, Height
-                        self.Controls.MousePressed = true
-                        if Item:Selected() and Item:Enabled() then
-                            if SubType == "UIMenuListItem" then
-                                if IsMouseInBounds(Item.LeftArrow.X + SafeZone.X, Item.LeftArrow.Y + SafeZone.Y, Item.LeftArrow.Width, Item.LeftArrow.Height) then
-                                    self:GoLeft()
-                                elseif not IsMouseInBounds(Item.RightArrow.X + SafeZone.X, Item.RightArrow.Y + SafeZone.Y, Item.RightArrow.Width, Item.RightArrow.Height) then
-                                    self:SelectItem()
-                                end
-                                if IsMouseInBounds(Item.RightArrow.X + SafeZone.X, Item.RightArrow.Y + SafeZone.Y, Item.RightArrow.Width, Item.RightArrow.Height) then
-                                    self:GoRight()
-                                elseif not IsMouseInBounds(Item.LeftArrow.X + SafeZone.X, Item.LeftArrow.Y + SafeZone.Y, Item.LeftArrow.Width, Item.LeftArrow.Height) then
-                                    self:SelectItem()
-                                end
-                            elseif SubType == "UIMenuSliderItem" then
-                                if IsMouseInBounds(Item.LeftArrow.X + SafeZone.X, Item.LeftArrow.Y + SafeZone.Y, Item.LeftArrow.Width, Item.LeftArrow.Height) then
-                                    self:GoLeft()
-                                elseif not IsMouseInBounds(Item.RightArrow.X + SafeZone.X, Item.RightArrow.Y + SafeZone.Y, Item.RightArrow.Width, Item.RightArrow.Height) then
-                                    self:SelectItem()
-                                end
-                                if IsMouseInBounds(Item.RightArrow.X + SafeZone.X, Item.RightArrow.Y + SafeZone.Y, Item.RightArrow.Width, Item.RightArrow.Height) then
-                                    self:GoRight()
-                                elseif not IsMouseInBounds(Item.LeftArrow.X + SafeZone.X, Item.LeftArrow.Y + SafeZone.Y, Item.LeftArrow.Width, Item.LeftArrow.Height) then
-                                    self:SelectItem()
-                                end
-                            elseif SubType == "UIMenuProgressItem" then
-                                if IsMouseInBounds(Item.Bar.X + SafeZone.X, Item.Bar.Y + SafeZone.Y - 12, Item.Data.Max, Item.Bar.Height + 24) then
-                                    Item:CalculateProgress(math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X)
-                                    self.OnProgressChange(self, Item, Item.Data.Index)
-                                    Item.OnProgressChanged(self, Item, Item.Data.Index)
-                                else
-                                    self:SelectItem()
-                                end
-                            else
-                                self:SelectItem()
-                            end
-                        elseif not Item:Selected() then
-                            self:CurrentSelection(i - 1)
-                            PlaySoundFrontend(-1, self.Settings.Audio.Error, self.Settings.Audio.Library, true)
-                            self.OnIndexChange(self, self:CurrentSelection())
-                            self.ReDraw = true
-                            self:UpdateScaleform()
-                        elseif not Item:Enabled() and Item:Selected() then
-                            PlaySoundFrontend(-1, self.Settings.Audio.Error, self.Settings.Audio.Library, true)
-                        end
-                        Citizen.Wait(175)
-                        while IsDisabledControlPressed(0, 24) and IsMouseInBounds(_X, _Y, _Width, _Height) do
+                    Citizen.CreateThread(
+                        function()
+                            local _X, _Y, _Width, _Height = X, Y, Width, Height
+                            self.Controls.MousePressed = true
                             if Item:Selected() and Item:Enabled() then
                                 if SubType == "UIMenuListItem" then
-                                    if IsMouseInBounds(Item.LeftArrow.X + SafeZone.X, Item.LeftArrow.Y + SafeZone.Y, Item.LeftArrow.Width, Item.LeftArrow.Height) then
+                                    if
+                                        IsMouseInBounds(
+                                            Item.LeftArrow.X + SafeZone.X,
+                                            Item.LeftArrow.Y + SafeZone.Y,
+                                            Item.LeftArrow.Width,
+                                            Item.LeftArrow.Height
+                                        )
+                                     then
                                         self:GoLeft()
+                                    elseif
+                                        not IsMouseInBounds(
+                                            Item.RightArrow.X + SafeZone.X,
+                                            Item.RightArrow.Y + SafeZone.Y,
+                                            Item.RightArrow.Width,
+                                            Item.RightArrow.Height
+                                        )
+                                     then
+                                        self:SelectItem()
                                     end
-                                    if IsMouseInBounds(Item.RightArrow.X + SafeZone.X, Item.RightArrow.Y + SafeZone.Y, Item.RightArrow.Width, Item.RightArrow.Height) then
+                                    if
+                                        IsMouseInBounds(
+                                            Item.RightArrow.X + SafeZone.X,
+                                            Item.RightArrow.Y + SafeZone.Y,
+                                            Item.RightArrow.Width,
+                                            Item.RightArrow.Height
+                                        )
+                                     then
                                         self:GoRight()
+                                    elseif
+                                        not IsMouseInBounds(
+                                            Item.LeftArrow.X + SafeZone.X,
+                                            Item.LeftArrow.Y + SafeZone.Y,
+                                            Item.LeftArrow.Width,
+                                            Item.LeftArrow.Height
+                                        )
+                                     then
+                                        self:SelectItem()
                                     end
                                 elseif SubType == "UIMenuSliderItem" then
-                                    if IsMouseInBounds(Item.LeftArrow.X + SafeZone.X, Item.LeftArrow.Y + SafeZone.Y, Item.LeftArrow.Width, Item.LeftArrow.Height) then
+                                    if
+                                        IsMouseInBounds(
+                                            Item.LeftArrow.X + SafeZone.X,
+                                            Item.LeftArrow.Y + SafeZone.Y,
+                                            Item.LeftArrow.Width,
+                                            Item.LeftArrow.Height
+                                        )
+                                     then
                                         self:GoLeft()
+                                    elseif
+                                        not IsMouseInBounds(
+                                            Item.RightArrow.X + SafeZone.X,
+                                            Item.RightArrow.Y + SafeZone.Y,
+                                            Item.RightArrow.Width,
+                                            Item.RightArrow.Height
+                                        )
+                                     then
+                                        self:SelectItem()
                                     end
-                                    if IsMouseInBounds(Item.RightArrow.X + SafeZone.X, Item.RightArrow.Y + SafeZone.Y, Item.RightArrow.Width, Item.RightArrow.Height) then
+                                    if
+                                        IsMouseInBounds(
+                                            Item.RightArrow.X + SafeZone.X,
+                                            Item.RightArrow.Y + SafeZone.Y,
+                                            Item.RightArrow.Width,
+                                            Item.RightArrow.Height
+                                        )
+                                     then
                                         self:GoRight()
+                                    elseif
+                                        not IsMouseInBounds(
+                                            Item.LeftArrow.X + SafeZone.X,
+                                            Item.LeftArrow.Y + SafeZone.Y,
+                                            Item.LeftArrow.Width,
+                                            Item.LeftArrow.Height
+                                        )
+                                     then
+                                        self:SelectItem()
                                     end
                                 elseif SubType == "UIMenuProgressItem" then
-                                    if IsMouseInBounds(Item.Bar.X + SafeZone.X, Item.Bar.Y + SafeZone.Y - 12, Item.Data.Max, Item.Bar.Height + 24) then
+                                    if
+                                        IsMouseInBounds(
+                                            Item.Bar.X + SafeZone.X,
+                                            Item.Bar.Y + SafeZone.Y - 12,
+                                            Item.Data.Max,
+                                            Item.Bar.Height + 24
+                                        )
+                                     then
                                         Item:CalculateProgress(math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X)
                                         self.OnProgressChange(self, Item, Item.Data.Index)
                                         Item.OnProgressChanged(self, Item, Item.Data.Index)
                                     else
                                         self:SelectItem()
                                     end
+                                else
+                                    self:SelectItem()
                                 end
                             elseif not Item:Selected() then
                                 self:CurrentSelection(i - 1)
@@ -3463,10 +4267,83 @@ function UIMenu:ProcessMouse()
                             elseif not Item:Enabled() and Item:Selected() then
                                 PlaySoundFrontend(-1, self.Settings.Audio.Error, self.Settings.Audio.Library, true)
                             end
-                            Citizen.Wait(125)
+                            Citizen.Wait(175)
+                            while IsDisabledControlPressed(0, 24) and IsMouseInBounds(_X, _Y, _Width, _Height) do
+                                if Item:Selected() and Item:Enabled() then
+                                    if SubType == "UIMenuListItem" then
+                                        if
+                                            IsMouseInBounds(
+                                                Item.LeftArrow.X + SafeZone.X,
+                                                Item.LeftArrow.Y + SafeZone.Y,
+                                                Item.LeftArrow.Width,
+                                                Item.LeftArrow.Height
+                                            )
+                                         then
+                                            self:GoLeft()
+                                        end
+                                        if
+                                            IsMouseInBounds(
+                                                Item.RightArrow.X + SafeZone.X,
+                                                Item.RightArrow.Y + SafeZone.Y,
+                                                Item.RightArrow.Width,
+                                                Item.RightArrow.Height
+                                            )
+                                         then
+                                            self:GoRight()
+                                        end
+                                    elseif SubType == "UIMenuSliderItem" then
+                                        if
+                                            IsMouseInBounds(
+                                                Item.LeftArrow.X + SafeZone.X,
+                                                Item.LeftArrow.Y + SafeZone.Y,
+                                                Item.LeftArrow.Width,
+                                                Item.LeftArrow.Height
+                                            )
+                                         then
+                                            self:GoLeft()
+                                        end
+                                        if
+                                            IsMouseInBounds(
+                                                Item.RightArrow.X + SafeZone.X,
+                                                Item.RightArrow.Y + SafeZone.Y,
+                                                Item.RightArrow.Width,
+                                                Item.RightArrow.Height
+                                            )
+                                         then
+                                            self:GoRight()
+                                        end
+                                    elseif SubType == "UIMenuProgressItem" then
+                                        if
+                                            IsMouseInBounds(
+                                                Item.Bar.X + SafeZone.X,
+                                                Item.Bar.Y + SafeZone.Y - 12,
+                                                Item.Data.Max,
+                                                Item.Bar.Height + 24
+                                            )
+                                         then
+                                            Item:CalculateProgress(
+                                                math.round(GetControlNormal(0, 239) * 1920) - SafeZone.X
+                                            )
+                                            self.OnProgressChange(self, Item, Item.Data.Index)
+                                            Item.OnProgressChanged(self, Item, Item.Data.Index)
+                                        else
+                                            self:SelectItem()
+                                        end
+                                    end
+                                elseif not Item:Selected() then
+                                    self:CurrentSelection(i - 1)
+                                    PlaySoundFrontend(-1, self.Settings.Audio.Error, self.Settings.Audio.Library, true)
+                                    self.OnIndexChange(self, self:CurrentSelection())
+                                    self.ReDraw = true
+                                    self:UpdateScaleform()
+                                elseif not Item:Enabled() and Item:Selected() then
+                                    PlaySoundFrontend(-1, self.Settings.Audio.Error, self.Settings.Audio.Library, true)
+                                end
+                                Citizen.Wait(125)
+                            end
+                            self.Controls.MousePressed = false
                         end
-                        self.Controls.MousePressed = false
-                    end)
+                    )
                 end
             end
         else
@@ -3475,33 +4352,40 @@ function UIMenu:ProcessMouse()
         ItemOffset = ItemOffset + self:CalculateItemHeightOffset(Item)
     end
 
-    local ExtraX, ExtraY = self.Position.X + SafeZone.X, 144 + self:CalculateItemHeight() + self.Position.Y + SafeZone.Y + WindowHeight
+    local ExtraX, ExtraY =
+        self.Position.X + SafeZone.X,
+        144 + self:CalculateItemHeight() + self.Position.Y + SafeZone.Y + WindowHeight
 
-    if #self.Items <= self.Pagination.Total + 1 then return end
+    if #self.Items <= self.Pagination.Total + 1 then
+        return
+    end
 
     if IsMouseInBounds(ExtraX, ExtraY, 431 + self.WidthOffset, 18) then
         self.Extra.Up:Colour(30, 30, 30, 255)
         if not self.Controls.MousePressed then
             if IsDisabledControlJustPressed(0, 24) then
-                Citizen.CreateThread(function()
-                    local _ExtraX, _ExtraY = ExtraX, ExtraY
-                    self.Controls.MousePressed = true
-                    if #self.Items > self.Pagination.Total + 1 then
-                        self:GoUpOverflow()
-                    else
-                        self:GoUp()
-                    end
-                    Citizen.Wait(175)
-                    while IsDisabledControlPressed(0, 24) and IsMouseInBounds(_ExtraX, _ExtraY, 431 + self.WidthOffset, 18) do
+                Citizen.CreateThread(
+                    function()
+                        local _ExtraX, _ExtraY = ExtraX, ExtraY
+                        self.Controls.MousePressed = true
                         if #self.Items > self.Pagination.Total + 1 then
                             self:GoUpOverflow()
                         else
                             self:GoUp()
                         end
-                        Citizen.Wait(125)
+                        Citizen.Wait(175)
+                        while IsDisabledControlPressed(0, 24) and
+                            IsMouseInBounds(_ExtraX, _ExtraY, 431 + self.WidthOffset, 18) do
+                            if #self.Items > self.Pagination.Total + 1 then
+                                self:GoUpOverflow()
+                            else
+                                self:GoUp()
+                            end
+                            Citizen.Wait(125)
+                        end
+                        self.Controls.MousePressed = false
                     end
-                    self.Controls.MousePressed = false
-                end)
+                )
             end
         end
     else
@@ -3512,25 +4396,28 @@ function UIMenu:ProcessMouse()
         self.Extra.Down:Colour(30, 30, 30, 255)
         if not self.Controls.MousePressed then
             if IsDisabledControlJustPressed(0, 24) then
-                Citizen.CreateThread(function()
-                    local _ExtraX, _ExtraY = ExtraX, ExtraY
-                    self.Controls.MousePressed = true
-                    if #self.Items > self.Pagination.Total + 1 then
-                        self:GoDownOverflow()
-                    else
-                        self:GoDown()
-                    end
-                    Citizen.Wait(175)
-                    while IsDisabledControlPressed(0, 24) and IsMouseInBounds(_ExtraX, _ExtraY + 18, 431 + self.WidthOffset, 18) do
+                Citizen.CreateThread(
+                    function()
+                        local _ExtraX, _ExtraY = ExtraX, ExtraY
+                        self.Controls.MousePressed = true
                         if #self.Items > self.Pagination.Total + 1 then
                             self:GoDownOverflow()
                         else
                             self:GoDown()
                         end
-                        Citizen.Wait(125)
+                        Citizen.Wait(175)
+                        while IsDisabledControlPressed(0, 24) and
+                            IsMouseInBounds(_ExtraX, _ExtraY + 18, 431 + self.WidthOffset, 18) do
+                            if #self.Items > self.Pagination.Total + 1 then
+                                self:GoDownOverflow()
+                            else
+                                self:GoDown()
+                            end
+                            Citizen.Wait(125)
+                        end
+                        self.Controls.MousePressed = false
                     end
-                    self.Controls.MousePressed = false
-                end)
+                )
             end
         end
     else
@@ -3563,14 +4450,17 @@ end
 
 function UIMenu:AddEnabledControl(Inputgroup, Control, Controller)
     if tonumber(Inputgroup) and tonumber(Control) then
-        table.insert(self.Settings.EnabledControls[(Controller and "Controller" or "Keyboard")], { Inputgroup, Control })
+        table.insert(self.Settings.EnabledControls[(Controller and "Controller" or "Keyboard")], {Inputgroup, Control})
     end
 end
 
 function UIMenu:RemoveEnabledControl(Inputgroup, Control, Controller)
     local Type = (Controller and "Controller" or "Keyboard")
     for Index = 1, #self.Settings.EnabledControls[Type] do
-        if Inputgroup == self.Settings.EnabledControls[Type][Index][1] and Control == self.Settings.EnabledControls[Type][Index][2] then
+        if
+            Inputgroup == self.Settings.EnabledControls[Type][Index][1] and
+                Control == self.Settings.EnabledControls[Type][Index][2]
+         then
             table.remove(self.Settings.EnabledControls[Type], Index)
             break
         end
@@ -3595,14 +4485,14 @@ function UIMenu:UpdateScaleform()
     PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(0)
     PushScaleformMovieFunctionParameterString(GetControlInstructionalButton(2, 176, 0))
-    PushScaleformMovieFunctionParameterString(Config.Languages[lang]['btn_select'])
+    PushScaleformMovieFunctionParameterString(Config.Languages[lang]["btn_select"])
     PopScaleformMovieFunction()
 
     if self.Controls.Back.Enabled then
         PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
         PushScaleformMovieFunctionParameterInt(1)
         PushScaleformMovieFunctionParameterString(GetControlInstructionalButton(2, 177, 0))
-        PushScaleformMovieFunctionParameterString(Config.Languages[lang]['btn_back'])
+        PushScaleformMovieFunctionParameterString(Config.Languages[lang]["btn_back"])
         PopScaleformMovieFunction()
     end
 
@@ -3610,7 +4500,10 @@ function UIMenu:UpdateScaleform()
         PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
         PushScaleformMovieFunctionParameterInt(3)
         PushScaleformMovieFunctionParameterString(GetControlInstructionalButton(2, 19, 0))
-        PushScaleformMovieFunctionParameterString(Config.Languages[lang]['btn_increment']..(paginationValue and ': '..paginationValue or ": "..paginationValue))
+        PushScaleformMovieFunctionParameterString(
+            Config.Languages[lang]["btn_increment"] ..
+                (paginationValue and ": " .. paginationValue or ": " .. paginationValue)
+        )
         PopScaleformMovieFunction()
     end
 
@@ -3639,7 +4532,6 @@ end
     MenuPool.lua
     Menus
 --]]
-
 function MenuPool.New()
     local _MenuPool = {
         Menus = {}
@@ -3844,7 +4736,6 @@ end
 --[[
     Wrappers
 --]]
-
 function NativeUI.CreatePool()
     return MenuPool.New()
 end

@@ -1,12 +1,18 @@
+--- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
+--- Leakers and resellers are the absolute scum of the earth we all support support open source ---
+--- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+
 function SetPlayerPedExpression(expression, saveToKvp)
     SetFacialIdleAnimOverride(PlayerPedId(), expression, 0)
-    if Config.PersistentExpression and saveToKvp then SetResourceKvp("expression", expression) end
+    if Config.PersistentExpression and saveToKvp then
+        SetResourceKvp("expression", expression)
+    end
 end
 
 local function DisplayExpressions()
     local moodsString = ""
     for name, _ in pairs(RP.Expressions) do
-        moodsString = moodsString..string.lower(name)..", "
+        moodsString = moodsString .. string.lower(name) .. ", "
     end
 
     EmoteChatMessage(moodsString)
@@ -14,31 +20,47 @@ local function DisplayExpressions()
 end
 
 if Config.ExpressionsEnabled then
-    RegisterCommand('mood', function(_source, args, _raw)
-        local expression = firstToUpper(string.lower(args[1]))
-        if RP.Expressions[expression] ~= nil then
-            SetPlayerPedExpression(RP.Expressions[expression][1], true)
-        else
-            EmoteChatMessage("'"..expression.."' is not a valid mood, do /moods to see all moods.")
-        end
-    end, false)
+    RegisterCommand(
+        "mood",
+        function(_source, args, _raw)
+            local expression = firstToUpper(string.lower(args[1]))
+            if RP.Expressions[expression] ~= nil then
+                SetPlayerPedExpression(RP.Expressions[expression][1], true)
+            else
+                EmoteChatMessage("'" .. expression .. "' is not a valid mood, do /moods to see all moods.")
+            end
+        end,
+        false
+    )
 
-    RegisterCommand('moods', function()
-        DisplayExpressions()
-    end, false)
+    RegisterCommand(
+        "moods",
+        function()
+            DisplayExpressions()
+        end,
+        false
+    )
 
     -- Chat Suggestions
-    TriggerEvent('chat:addSuggestion', '/mood', 'Set your current mood/expression.', { { name = "expression", help = "/moods for a list of valid moods" } })
-    TriggerEvent('chat:addSuggestion', '/moods', 'List available walking moods/expressions.')
+    TriggerEvent(
+        "chat:addSuggestion",
+        "/mood",
+        "Set your current mood/expression.",
+        {{name = "expression", help = "/moods for a list of valid moods"}}
+    )
+    TriggerEvent("chat:addSuggestion", "/moods", "List available walking moods/expressions.")
 
     -- Persistent Expressions
     if Config.PersistentExpression then
-        AddEventHandler('playerSpawned', function()
-            local expression = GetResourceKvpString("expression")
-            if expression ~= nil then
-                Wait(2500) -- Delay, to ensure the player ped has loaded in
-                SetPlayerPedExpression(expression, false)
+        AddEventHandler(
+            "playerSpawned",
+            function()
+                local expression = GetResourceKvpString("expression")
+                if expression ~= nil then
+                    Wait(2500) -- Delay, to ensure the player ped has loaded in
+                    SetPlayerPedExpression(expression, false)
+                end
             end
-        end)
+        )
     end
 end

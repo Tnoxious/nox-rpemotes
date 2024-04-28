@@ -1,9 +1,15 @@
-if Config.Framework ~= 'qb-core' then return end
+--- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
+--- Leakers and resellers are the absolute scum of the earth we all support support open source ---
+--- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
 
-local framework = 'qb-core'
+if Config.Framework ~= "qb-core" then
+    return
+end
+
+local framework = "qb-core"
 local state = GetResourceState(framework)
 
-if state == 'missing' or state == "unknown" then
+if state == "missing" or state == "unknown" then
     -- Framework can't be used if it's missing or unknown
     return
 end
@@ -15,88 +21,127 @@ QBCore = exports[framework]:GetCoreObject()
 PlayerData = QBCore.Functions.GetPlayerData()
 isLoggedIn = false
 
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    PlayerData = QBCore.Functions.GetPlayerData()
-    isLoggedIn = true
-end)
-
-RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    PlayerData = {}
-    isLoggedIn = false
-end)
-
-RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
-    PlayerData = val
-end)
-
--- This is here to get the player data when the resource is restarted instead of having to log out and back in each time
--- This won't set the player data too early as this only triggers when the server side is started and not the client side
-AddEventHandler('onResourceStart', function(resource)
-    if resource == GetCurrentResourceName() then
-        Wait(200)
+RegisterNetEvent(
+    "QBCore:Client:OnPlayerLoaded",
+    function()
         PlayerData = QBCore.Functions.GetPlayerData()
         isLoggedIn = true
     end
-end)
+)
+
+RegisterNetEvent(
+    "QBCore:Client:OnPlayerUnload",
+    function()
+        PlayerData = {}
+        isLoggedIn = false
+    end
+)
+
+RegisterNetEvent(
+    "QBCore:Player:SetPlayerData",
+    function(val)
+        PlayerData = val
+    end
+)
+
+-- This is here to get the player data when the resource is restarted instead of having to log out and back in each time
+-- This won't set the player data too early as this only triggers when the server side is started and not the client side
+AddEventHandler(
+    "onResourceStart",
+    function(resource)
+        if resource == GetCurrentResourceName() then
+            Wait(200)
+            PlayerData = QBCore.Functions.GetPlayerData()
+            isLoggedIn = true
+        end
+    end
+)
 
 function CanUseFavKeyBind()
-    return not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead']
+    return not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"]
 end
 
 -- Added events
-RegisterNetEvent('animations:client:PlayEmote', function(args)
-    if not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] then
-        EmoteCommandStart(source, args)
+RegisterNetEvent(
+    "animations:client:PlayEmote",
+    function(args)
+        if not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"] then
+            EmoteCommandStart(source, args)
+        end
     end
-end)
+)
 
 if Config.SqlKeybinding then
-    RegisterNetEvent('animations:client:BindEmote', function(args)
-        if not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] then
-            EmoteBindStart(source, args)
+    RegisterNetEvent(
+        "animations:client:BindEmote",
+        function(args)
+            if not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"] then
+                EmoteBindStart(source, args)
+            end
         end
-    end)
+    )
 
-    RegisterNetEvent('animations:client:EmoteBinds', function()
-        if not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] then
-            EmoteBindsStart()
+    RegisterNetEvent(
+        "animations:client:EmoteBinds",
+        function()
+            if not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"] then
+                EmoteBindsStart()
+            end
         end
-    end)
+    )
 end
 
-RegisterNetEvent('animations:client:EmoteMenu', function()
-    if not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] then
-        OpenEmoteMenu()
+RegisterNetEvent(
+    "animations:client:EmoteMenu",
+    function()
+        if not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"] then
+            OpenEmoteMenu()
+        end
     end
-end)
+)
 
-RegisterNetEvent('animations:client:ListEmotes', function()
-    if not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] then
-        EmotesOnCommand()
+RegisterNetEvent(
+    "animations:client:ListEmotes",
+    function()
+        if not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"] then
+            EmotesOnCommand()
+        end
     end
-end)
+)
 
-RegisterNetEvent('animations:client:Walk', function(args)
-    if not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] then
-        WalkCommandStart(source, args)
+RegisterNetEvent(
+    "animations:client:Walk",
+    function(args)
+        if not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"] then
+            WalkCommandStart(source, args)
+        end
     end
-end)
+)
 
-RegisterNetEvent('animations:client:ListWalks', function()
-    if not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] then
-        WalksOnCommand()
+RegisterNetEvent(
+    "animations:client:ListWalks",
+    function()
+        if not PlayerData.metadata["inlaststand"] and not PlayerData.metadata["isdead"] then
+            WalksOnCommand()
+        end
     end
-end)
+)
 
 -- Added by https://github.dev/qbcore-framework/dpemotes/
 
 CanDoEmote = true
-RegisterNetEvent('animations:ToggleCanDoAnims', function(bool)
-    CanDoEmote = bool
-end)
-
-RegisterNetEvent('animations:client:EmoteCommandStart', function(args)
-    if CanDoEmote then
-        EmoteCommandStart(source, args)
+RegisterNetEvent(
+    "animations:ToggleCanDoAnims",
+    function(bool)
+        CanDoEmote = bool
     end
-end)
+)
+
+RegisterNetEvent(
+    "animations:client:EmoteCommandStart",
+    function(args)
+        if CanDoEmote then
+            EmoteCommandStart(source, args)
+        end
+    end
+)
