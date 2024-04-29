@@ -1,14 +1,14 @@
 --- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support support open source ---
+--- Leakers and resellers are the absolute scum of the earth we all support open source ---
 --- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
 
 fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
-description 'RP-EMOTES - Maintained by Jimathy and Tnoxious for the Community!'
+description 'RpEmotes - Maintained by Jimathy and Tnoxious for the Community!'
 author 'Tnoxious Repo - Keeping the Project alive!'
 version '1.1.8'
-lua54 'yes'
 
 dependencies {
     '/server:5848',
