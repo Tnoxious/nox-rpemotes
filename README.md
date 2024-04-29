@@ -380,11 +380,6 @@ Alternatively, you can use the keybind command that comes with FiveM without hav
 
 * Type `/refresh` and `/start rpemotes` into your chat resource, or simply restart your server
 
-# Additional Instructions ⚙️
-
-- **Check out my youtube playlist below:**
-
-[![Video Preview](https://img.youtube.com/vi/Uk_ggRRlFuo/0.jpg)](https://www.youtube.com/watch?v=3uVe0hvWwPQ&list=PLzFM1zdDHFn2vKWT323wVJoEkGhWiyyeC)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
