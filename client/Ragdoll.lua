@@ -1,5 +1,5 @@
 --- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support support open source ---
+--- Leakers and resellers are the absolute scum of the earth we all support open source ---
 --- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
 
 if Config.RagdollEnabled then
