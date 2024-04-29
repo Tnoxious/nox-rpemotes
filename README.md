@@ -1,24 +1,16 @@
 # RpEmotes 🏋️
 
-RpEmotes is a community driven FiveM emote menu allowing players to express themselves in roleplay with custom animations, countless facial expressions, walkstyles and props, inspired by [DullPear](https://github.com/andristum/dpemotes).
+This repository serves as my fork of RpEmotes, with fixes and edits done following the privatization of RpEmotes in 2024
 
-<img src="https://forum.cfx.re/uploads/default/original/4X/6/8/c/68cd34ce003360d74d73551f9be7215f5b6c7a31.jpeg" width="800">
+RpEmotes is a community driven FiveM emote menu allowing players to express themselves in roleplay with custom animations, countless facial expressions, walkstyles and props, inspired by [DullPear](https://github.com/andristum/dpemotes). RpEmotes was managed by TayMcKenzieNZ, and then later forked by jimathy after TayMcKenzieNZ set all his repositories to private and now added to Tnoxious github to keep the project alive and open source.
+
+The original repository was https://github.com/TayMcKenzieNZ/rpemotes/
+
+![TnoxEmotesBanner](https://github.com/Tnoxious/nox-rpemotes/assets/167952403/df6f88ae-4ae5-4cc1-9f81-25c203575e79)
 
 
 
-# **Join Our Official Discord 💬**
 
-<a href="https://discord.gg/sw3NwDq6C8" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/discord.svg" alt="sw3NwDq6C8" height="120" width="180" /></a>
-
-- Report Issues ⚠️
-
-- Report Bugs 🪲
-
-- Contribute Code 🛠️
-
-- Contribute Translations 🌎
-
-- Chat With Our Amazing Community 🗨️
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
