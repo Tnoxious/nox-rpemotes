@@ -1,6 +1,5 @@
---- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support open source ---
---- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+--- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+--- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
 
 if Config.Framework ~= "qb-core" then
     return

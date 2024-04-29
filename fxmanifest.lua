@@ -1,17 +1,15 @@
---- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support open source ---
---- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+--- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+ --- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
 
 fx_version 'cerulean'
 game 'gta5'
+authors { 'Tnoxious', 'TayMcKenzieNZ', 'MadsL', 'Mathu_lmn', 'MLGCrisis', 'Jimathy', 'Mathu-lmn', 'Daudeuf' }
+description 'RpEmotes is a community driven FiveM emote menu allowing players to express themselves in roleplay universe. This version by Tnoxious keeping the RpEmotes menu alive!'
+version '1.2.0'
 lua54 'yes'
 
-description 'RpEmotes - Maintained by Jimathy and Tnoxious for the Community!'
-author 'Tnoxious Repo - Keeping the Project alive!'
-version '1.1.8'
-
 dependencies {
-    '/server:5848',
+    '/server:6683',
     '/onesync',
 }
 
@@ -24,26 +22,40 @@ dependencies {
 
 --#endregion oxmysql
 
+files {
+    'propsets.meta',
+    'conditionalanims.meta',
+}
+
+data_file 'AMBIENT_PROP_MODEL_SET_FILE' 'propsets.meta'
+data_file 'CONDITIONAL_ANIMS_FILE' 'conditionalanims.meta'
+
 shared_scripts {
     'config.lua',
-    'Translations.lua'
+    'Translations.lua',
+    'animals.lua',
 }
 
 server_scripts {
     'printer.lua',
     'server/Server.lua',
+    'server/Updates.lua', --fixed updater to Tnoxious Fork
     'server/frameworks/*.lua'
 }
 
 client_scripts {
     'NativeUI.lua',
+    'client/Utils.lua',
     'client/AnimationList.lua',
     'client/AnimationListCustom.lua',
+    'client/Binoculars.lua',
     'client/Crouch.lua',
     'client/Emote.lua',
     'client/EmoteMenu.lua',
     'client/Expressions.lua',
     'client/Keybinds.lua',
+    'client/NewsCam.lua',
+    'client/NoIdleCam.lua',
     'client/Pointing.lua',
     'client/Ragdoll.lua',
     'client/Syncing.lua',
@@ -51,29 +63,28 @@ client_scripts {
     'client/frameworks/*.lua'
 }
 
-
 ---- Loads all ytyp files for custom props to stream ---
+---- You will need to add a data_file 'DLC_ITYP_REQUEST' for your own to work in game ---
 
 data_file 'DLC_ITYP_REQUEST' 'stream/taymckenzienz_rpemotes.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'badge1.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'copbadge.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'bzzz_foodpack'
-data_file 'DLC_ITYP_REQUEST' 'bzzz_prop_torch_fire001.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'natty_props_lollipops.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'apple_1.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_food_icecream_pack.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_food_dessert_a.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_give_gift.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/ultra_ringcase.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_food_xmas22.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/knjgh_pizzas.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/pata_christmasfood.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/pata_cake.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/pata_freevalentinesday.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_love_001.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_birthday_001.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_baby_001.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_prop_cake_casino001.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/brum_heart.ytyp'
-data_file 'DLC_ITYP_REQUEST' 'stream/brum_heartfrappe.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/brummie_props.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/bzzz_props.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'bzzz_camp_props.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/apple_1.ytyp'
 data_file 'DLC_ITYP_REQUEST' 'stream/kaykaymods_props.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/knjgh_pizzas.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/natty_props_lollipops.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/ultra_ringcase.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/pata_props.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/vedere_props.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/pnwsigns.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/ems_props.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_totoro_bento09.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_sushi_platter.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_soda10.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_soda01.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_rilakkuma_cake07.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_heart_tray.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_black_tea.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_bag_prop01.ytyp'
+data_file 'DLC_ITYP_REQUEST' 'stream/kawaii_animal_breads.ytyp'

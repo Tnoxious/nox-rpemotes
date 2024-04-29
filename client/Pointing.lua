@@ -1,6 +1,5 @@
---- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support open source ---
---- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+--- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+--- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
 
 Pointing = false
 
@@ -8,13 +7,16 @@ local function IsPlayerAiming(player)
     return IsPlayerFreeAiming(player) or IsAimCamActive() or IsAimCamThirdPersonActive()
 end
 
+--- Enabled pointing in a car, however hands up and pointing on a bike is broken until someone can give enough of a fuck to chime in and fix it. ---
+
 local function CanPlayerPoint(playerId, playerPed)
     if
-        not DoesEntityExist(playerPed) or not IsPedOnFoot(playerPed) or IsPlayerAiming(playerId) or
+        not DoesEntityExist(playerPed) or IsPedOnAnyBike(playerPed) or IsPlayerAiming(playerId) or
             IsPedFalling(playerPed) or
             IsPedInjured(playerPed) or
             IsPedInMeleeCombat(playerPed) or
-            IsPedRagdoll(playerPed)
+            IsPedRagdoll(playerPed) or
+            not IsPedHuman(playerPed)
      then
         return false
     end
@@ -31,6 +33,23 @@ local function PointingStopped()
         ClearPedSecondaryTask(playerPed)
     end
     RemoveAnimDict("anim@mp_point")
+    if Config.PersistentEmoteAfterPointing and IsInAnimation then
+        local emote = RP.Emotes[CurrentAnimationName]
+        if not emote then
+            emote = RP.PropEmotes[CurrentAnimationName]
+        end
+
+        if not emote then
+            return
+        end
+
+        emote.name = CurrentAnimationName
+
+        ClearPedSecondaryTask(playerPed)
+        Wait(400)
+        DestroyAllProps()
+        OnEmotePlay(emote, emote.name)
+    end
 end
 
 local function PointingThread()
@@ -106,9 +125,7 @@ local function PointingThread()
 end
 
 local function StartPointing()
-    -- Don't start to point if we are prone
-    if IsProne then
-        EmoteChatMessage("You can't point while crawling.")
+    if isInActionWithErrorMessage() then
         return
     end
 
@@ -123,7 +140,7 @@ local function StartPointing()
     if Pointing and LoadAnim("anim@mp_point") then
         SetPedConfigFlag(playerPed, 36, true)
         TaskMoveNetworkByName(playerPed, "task_mp_pointing", 0.5, false, "anim@mp_point", 24)
-
+        DestroyAllProps()
         -- Start thread
         PointingThread()
     end
@@ -134,6 +151,9 @@ if Config.PointingEnabled then
     RegisterCommand(
         "pointing",
         function()
+            if IsPedInAnyVehicle(PlayerPedId(), false) and not Config.PointingKeybindInCarEnabled then
+                return
+            end
             StartPointing()
         end,
         false

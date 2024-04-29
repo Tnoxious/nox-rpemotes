@@ -1,10 +1,14 @@
---- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support open source ---
---- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+--- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+--- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
 
-rightPosition = {x = 1450, y = 100}
-leftPosition = {x = 0, y = 100}
-menuPosition = {x = 0, y = 200}
+local rightPosition = {x = 1450, y = 100}
+local leftPosition = {x = 0, y = 100}
+local menuPosition = {x = 0, y = 200}
+
+if GetAspectRatio() > 2.0 then
+    rightPosition = {x = 1200, y = 100}
+    leftPosition = {x = -250, y = 100}
+end
 
 if Config.MenuPosition then
     if Config.MenuPosition == "left" then
@@ -28,16 +32,6 @@ end
 _menuPool = NativeUI.CreatePool()
 mainMenu = NativeUI.CreateMenu(Config.MenuTitle or "", "", menuPosition["x"], menuPosition["y"], Menuthing, Menuthing)
 _menuPool:Add(mainMenu)
-
-function ShowNotification(text)
-    if Config.NotificationsAsChatMessage then
-        TriggerEvent("chat:addMessage", {color = {255, 255, 255}, args = {tostring(text)}})
-    else
-        BeginTextCommandThefeedPost("STRING")
-        AddTextComponentSubstringPlayerName(text)
-        EndTextCommandThefeedPostTicker(false, false)
-    end
-end
 
 local EmoteTable = {}
 local FavEmoteTable = {}
@@ -226,12 +220,12 @@ function AddEmoteMenu(menu)
         favmenu.OnItemSelect = function(sender, item, index)
             if FavEmoteTable[index] == Config.Languages[lang]["rfavorite"] then
                 FavoriteEmote = ""
-                ShowNotification(Config.Languages[lang]["rfavorite"], 2000)
+                SimpleNotify(Config.Languages[lang]["rfavorite"])
                 return
             end
             if Config.FavKeybindEnabled then
                 FavoriteEmote = FavEmoteTable[index]
-                ShowNotification("~o~" .. firstToUpper(FavoriteEmote) .. Config.Languages[lang]["newsetemote"])
+                SimpleNotify("~o~" .. firstToUpper(FavoriteEmote) .. Config.Languages[lang]["newsetemote"])
             end
         end
     end
@@ -402,14 +396,14 @@ if Config.Search then
                     end
                     if data == Config.Languages[lang]["rfavorite"] then
                         FavoriteEmote = ""
-                        ShowNotification(Config.Languages[lang]["rfavorite"], 2000)
+                        SimpleNotify(Config.Languages[lang]["rfavorite"])
                         return
                     end
 
                     if favEnabled and IsControlPressed(0, 21) then
                         if data.table ~= "Shared" then
                             FavoriteEmote = data.name
-                            ShowNotification("~o~" .. firstToUpper(data.name) .. Config.Languages[lang]["newsetemote"])
+                            SimpleNotify("~o~" .. firstToUpper(data.name) .. Config.Languages[lang]["newsetemote"])
                         else
                             SimpleNotify(Config.Languages[lang]["searchcantsetfav"])
                         end
@@ -507,7 +501,7 @@ function AddWalkMenu(menu)
         if item ~= walkreset then
             WalkMenuStart(WalkTable[index])
         else
-            ResetPedMovementClipset(PlayerPedId())
+            ResetWalk()
             DeleteResourceKvp("walkstyle")
         end
     end
@@ -536,47 +530,57 @@ function AddFaceMenu(menu)
 end
 
 function AddInfoMenu(menu)
-    -- TODO: Add a way to check if there is an update available.
-    -- This got broken with the Update refactor of the name change and
-    -- at the time I'm fixing this, I couldn't test anything in game so
-    -- I won't introduce any breaking changes - AvaN0x
-
     -- if not UpdateAvailable then
     infomenu =
-        _menuPool:AddSubMenu(menu, Config.Languages[lang]["infoupdate"], "Huge Thank You ❤️", "", Menuthing, Menuthing)
+        _menuPool:AddSubMenu(
+        menu,
+        Config.Languages[lang]["infoupdate"],
+        "~h~~y~The RPEmotes Team & Collaborators~h~~y~",
+        "",
+        Menuthing,
+        Menuthing
+    )
     -- else
     --     infomenu = _menuPool:AddSubMenu(menu, Config.Languages[lang]['infoupdateav'],
     --         Config.Languages[lang]['infoupdateavtext'], "", Menuthing, Menuthing)
     -- end
-    infomenu:AddItem(
-        NativeUI.CreateItem(Config.Languages[lang]["suggestions"], Config.Languages[lang]["suggestionsinfo"])
-    )
+
     infomenu:AddItem(
         NativeUI.CreateItem(
-            'Join the <font color="#00ceff">Discord 💬</font>',
-            'Join our official discord! 💬 <font color="#00ceff">https://discord.gg/sw3NwDq6C8</font>'
+            '<font color="#FF25B1"><b>nox-rpemotes Repository<b></font>',
+            '<font color="#FF25B1">https://github.com/Tnoxious/nox-rpemotes</font>'
         )
     )
+    infomenu:AddItem(NativeUI.CreateItem("Thanks ~o~TayMcKenzieNZ 🍐~s~", "~o~TayMcKenzieNZ~s~ for previous work"))
+    infomenu:AddItem(
+        NativeUI.CreateItem("Thanks <b>Kibook 🐩</b>", "<b>Kibook</b> for the addition of Animal Emotes 🐩 submenu.")
+    )	
     infomenu:AddItem(NativeUI.CreateItem("Thanks ~o~DullPear 🍐~s~", "~o~DullPear~s~ for the original dpemotes ❤️"))
     infomenu:AddItem(
         NativeUI.CreateItem("Thanks <b>Kibook 🐩</b>", "<b>Kibook</b> for the addition of Animal Emotes 🐩 submenu.")
     )
     infomenu:AddItem(
         NativeUI.CreateItem(
-            "Thanks ~y~AvaN0x 🇮🇹~s~",
-            "~y~AvaN0x~s~ for reformatting and assisting with code and additional features 🙏"
+            "Thanks ~y~AvaN0x 🇫🇷~s~",
+            "~y~AvaN0x~s~ 🇫🇷 for reformatting and assisting with code and additional features 🙏"
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#0e64ed">Mads 🤖</font>',
+            '<font color="#0e64ed">Mads 🤖</font> for the addition of Exit Emotes, Crouch & Crawl ⚙️'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#ff451d">Mathu_lmn 🇫🇷 </font>',
+            '<font color="#ff451d">Mathu_lmn 🇫🇷</font>  Additional features and fixes 🛠️'
         )
     )
     infomenu:AddItem(
         NativeUI.CreateItem(
             'Thanks <font color="#1C9369">northsqrd ⚙️</font>',
             '<font color="#1C9369">northsqrd</font> for assisting with search feature and phone colours 🔎'
-        )
-    )
-    infomenu:AddItem(
-        NativeUI.CreateItem(
-            'Thanks <font color="#A6A333">Scullyy 👨‍💻</font>',
-            '<font color="#A6A333">Scullyy</font> for assisting with code and rebranding'
         )
     )
     infomenu:AddItem(
@@ -619,7 +623,7 @@ function AddInfoMenu(menu)
     infomenu:AddItem(
         NativeUI.CreateItem(
             'Thanks <font color="#37DA00">BzZzi 🤭</font>',
-            '<font color="#37DA00">BzZzi</font> for the custom food props 🍩.'
+            '<font color="#37DA00">BzZzi</font> for the custom props 🍩.'
         )
     )
     infomenu:AddItem(
@@ -690,12 +694,6 @@ function AddInfoMenu(menu)
     )
     infomenu:AddItem(
         NativeUI.CreateItem(
-            'Thanks <font color="#0e64ed">Mads 🤖</font>',
-            '<font color="#0e64ed">Mads 🤖</font> for the addition of Exit Emotes, Crouch & Crawl ⚙️'
-        )
-    )
-    infomenu:AddItem(
-        NativeUI.CreateItem(
             'Thanks <font color="#eb540e">Copofiscool 🇦🇺</font>',
             '<font color="#eb540e">Copofiscool</font> for the Favorite Emote keybind toggle fix 🇦🇺'
         )
@@ -724,21 +722,96 @@ function AddInfoMenu(menu)
             '<font color="#d10870">KayKayMods</font> for the custom props 🧋'
         )
     )
-
-    infomenu:AddItem(NativeUI.CreateItem("Thanks to the community", "Translations, bug reports and moral support 🌐"))
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#de1846">Dark Animations</font>',
+            '<font color="#de1846">Dark Animations</font> for the custom animations 🖤'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#00FF12">Brum 🇬🇧</font>',
+            '<font color="#00FF12">Brum</font> for the custom props  🇬🇧'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#017a05">Chico 💀</font>',
+            '<font color="#017a05">Chico 💀</font> for fixing persistent walkstyles and moods for QB-Core and ESX.'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#194ce6">-EcLiPsE- ✌🏻</font>',
+            '<font color="#194ce6">-EcLiPsE- ✌🏻 </font> for NPC prop sets and GTA Online biker animations'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#3488c8">MrWitt 🦑️</font>',
+            '<font color="#3488c8">MrWitt 🦑</font> for the custom animations.'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#ff96b6">AdoredRose 🌹</font>',
+            '<font color="#ff96b6">AdoredRose 🌹</font> for assistance with adding animations.'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#ff451d">DRX Animations 👑</font>',
+            '<font color="#ff451d">DRX Animations 👑</font> for the custom animations'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#12ab0a">Radial 🫡</font>',
+            '<font color="#12ab0a">Radial</font> on discord for contributing animations code'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem(
+            'Thanks <font color="#12ab0a">Tnoxious AU</font>',
+            '<font color="#12ab0a">Tnoxious</font> for current nox-rpemotes repository'
+        )
+    )
+    infomenu:AddItem(
+        NativeUI.CreateItem("<b>Thanks to the Community<b>", "Translations, bug reports and moral support and help keeping project alive!")
+    )
 end
 
 function OpenEmoteMenu()
+    if IsEntityDead(PlayerPedId()) then
+        -- show in chat
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+    if (IsPedSwimming(PlayerPedId()) or IsPedSwimmingUnderWater(PlayerPedId())) and not Config.AllowInWater then
+        -- show in chat
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["swimming"]}
+            }
+        )
+        return
+    end
     if _menuPool:IsAnyMenuOpen() then
         _menuPool:CloseAllMenus()
     else
         mainMenu:Visible(true)
         ProcessMenu()
     end
-end
-
-function firstToUpper(str)
-    return (str:gsub("^%l", string.upper))
 end
 
 AddEmoteMenu(mainMenu)
@@ -781,5 +854,24 @@ AddEventHandler(
     "rp:RecieveMenu",
     function()
         OpenEmoteMenu()
+    end
+)
+
+-- While ped is dead, don't show menus
+Citizen.CreateThread(
+    function()
+        while true do
+            Citizen.Wait(500)
+            if IsEntityDead(PlayerPedId()) then
+                _menuPool:CloseAllMenus()
+            end
+            if (IsPedSwimming(PlayerPedId()) or IsPedSwimmingUnderWater(PlayerPedId())) and not Config.AllowInWater then
+                -- cancel emote, destroy props and close menu
+                if IsInAnimation then
+                    EmoteCancel()
+                end
+                _menuPool:CloseAllMenus()
+            end
+        end
     end
 )

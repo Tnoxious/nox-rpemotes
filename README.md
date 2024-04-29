@@ -1,10 +1,14 @@
 # RpEmotes 🏋️
 
-This repository serves as my fork of RpEmotes, with fixes and edits done following the privatization of RpEmotes in 2024
+This repository serves as my fork of RpEmotes, with fixes and edits done following the privatization of RpEmotes in 2024. This version now has the most up-to-date build as of April 30, 2024, with plans to keep the project active for others to use.
 
-RpEmotes is a community driven FiveM emote menu allowing players to express themselves in roleplay with custom animations, countless facial expressions, walkstyles and props, inspired by [DullPear](https://github.com/andristum/dpemotes). RpEmotes was managed by TayMcKenzieNZ, and then later forked by jimathy after TayMcKenzieNZ set all his repositories to private and now added to Tnoxious github to keep the project alive and open source.
+RpEmotes is a community-driven FiveM emote menu allowing players to express themselves in roleplay with custom animations, countless facial expressions, walkstyles, and props, inspired by [DullPear](https://github.com/andristum/dpemotes). RpEmotes was managed by TayMcKenzieNZ and then later forked by jimathy after TayMcKenzieNZ set all his repositories to private and now added them to Tnoxious github to keep the project alive and open source.
 
-The original repository was https://github.com/TayMcKenzieNZ/rpemotes/
+Past Repositorys
+- https://github.com/Daudeuf/rpemotes (started here)
+- https://github.com/TayMcKenzieNZ/rpemotes/ (Locked access)
+- https://github.com/MLGCrisis/rpemotes (no updates now)
+- https://github.com/jimathy/rpemotes (missing alot updates)
 
 ![TnoxEmotesBanner](https://github.com/Tnoxious/nox-rpemotes/assets/167952403/df6f88ae-4ae5-4cc1-9f81-25c203575e79)
 
@@ -15,6 +19,8 @@ The original repository was https://github.com/TayMcKenzieNZ/rpemotes/
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Available in 🌏
+
+* Albanian 🇦🇱
 
 * Brazilian Portuguese 🇧🇷
 
@@ -36,9 +42,15 @@ The original repository was https://github.com/TayMcKenzieNZ/rpemotes/
 
 * German 🇩🇪
 
+* Greek 🇬🇷
+
 * Hungarian 🇭🇺
 
+* Indonesian 🇮🇩
+
 * Italian 🇮🇹
+
+* Lithuanian 🇱🇹
 
 * Norwegian 🇳🇴
 
@@ -50,7 +62,11 @@ The original repository was https://github.com/TayMcKenzieNZ/rpemotes/
 
 * Russian 🇷🇺
 
+* Serbian 🇷🇸
+
 * Sinhala 🇱🇰
+
+* Slovenian 🇸🇮 
 
 * Spanish 🇪🇸
 
@@ -132,7 +148,7 @@ exports["rpemotes"]:IsPlayerInAnim()
 The keybind uses RegisterKeyMapping. By default the configured keybind in the *initial* config.lua will be the default key, however once the keybind is set for a user it'll remain and can be changed in the users settings under `Esc > settings > keybinds > fivem`.
 
 
-**Menu key:** F4
+**Menu key:** F3
 
 Server owners can change this in the `config.lua`.
 
@@ -334,7 +350,7 @@ Command usage example: emoteextract 1
 
 # Installation Instructions ⚙️:
 
-* Add `ensure rpemotes` to your `server.cfg`
+* Add `ensure nox-rpemotes` to your `server.cfg` under QB core if you use that core 
 
 * Download the latest recommended artifacts [for Windows](https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/) or [for Linux](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)
 

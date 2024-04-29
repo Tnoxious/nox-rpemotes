@@ -1,8 +1,14 @@
---- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support open source ---
---- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+--- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+--- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
+
+local canChange = true
+local unable_message = "You are unable to change your walking style right now."
 
 function WalkMenuStart(name)
+    if not canChange then
+        EmoteChatMessage(unable_message)
+        return
+    end
     if Config.PersistentWalk then
         SetResourceKvp("walkstyle", name)
     end
@@ -11,14 +17,15 @@ function WalkMenuStart(name)
     RemoveAnimSet(name)
 end
 
-function RequestWalking(set)
-    RequestAnimSet(set)
-    while not HasAnimSetLoaded(set) do
-        Citizen.Wait(1)
+function ResetWalk()
+    if not canChange then
+        EmoteChatMessage(unable_message)
+        return
     end
+    ResetPedMovementClipset(PlayerPedId())
 end
 
-function WalksOnCommand(source, args, raw)
+function WalksOnCommand()
     local WalksCommand = ""
     for a in pairsByKeys(RP.Walks) do
         WalksCommand = WalksCommand .. "" .. string.lower(a) .. ", "
@@ -27,11 +34,16 @@ function WalksOnCommand(source, args, raw)
     EmoteChatMessage("To reset do /walk reset")
 end
 
-function WalkCommandStart(source, args, raw)
-    local name = firstToUpper(string.lower(args[1]))
+function WalkCommandStart(name)
+    if not canChange then
+        EmoteChatMessage(unable_message)
+        return
+    end
+    name = firstToUpper(string.lower(name))
 
     if name == "Reset" then
         ResetPedMovementClipset(PlayerPedId())
+        DeleteResourceKvp("walkstyle")
         return
     end
 
@@ -45,11 +57,11 @@ function WalkCommandStart(source, args, raw)
     end
 end
 
-function tableHasKey(table, key)
-    return table[key] ~= nil
-end
+--- Persistent Walkstyles are stored to KVP. Once the player has spawned, the walkstyle is applied. ---
+--- I've added QBCore and ESX support so hopefully people quit crying about it. derchico  ---
 
 if Config.WalkingStylesEnabled and Config.PersistentWalk then
+    -- Basic Event for Standalone
     AddEventHandler(
         "playerSpawned",
         function()
@@ -60,4 +72,62 @@ if Config.WalkingStylesEnabled and Config.PersistentWalk then
             end
         end
     )
+    -- Event for QB-Core Users.
+    RegisterNetEvent(
+        "QBCore:Client:OnPlayerLoaded",
+        function()
+            Citizen.Wait(5000)
+            local kvp = GetResourceKvpString("walkstyle")
+
+            if kvp ~= nil then
+                WalkMenuStart(kvp)
+            end
+        end
+    )
+    -- Event for ESX Users.
+    RegisterNetEvent("esx:playerLoaded")
+    AddEventHandler(
+        "esx:playerLoaded",
+        function()
+            Citizen.Wait(5000)
+            local kvp = GetResourceKvpString("walkstyle")
+
+            if kvp ~= nil then
+                WalkMenuStart(kvp)
+            end
+        end
+    )
 end
+
+if Config.WalkingStylesEnabled then
+    RegisterCommand(
+        "walks",
+        function()
+            WalksOnCommand()
+        end,
+        false
+    )
+    RegisterCommand(
+        "walk",
+        function(source, args, raw)
+            WalkCommandStart(tostring(args[1]))
+        end,
+        false
+    )
+    TriggerEvent(
+        "chat:addSuggestion",
+        "/walk",
+        "Set your walkingstyle.",
+        {{name = "style", help = "/walks for a list of valid styles"}}
+    )
+    TriggerEvent("chat:addSuggestion", "/walks", "List available walking styles.")
+end
+
+function toggleWalkstyle(bool, message)
+    canChange = bool
+    if message then
+        unable_message = message
+    end
+end
+
+exports("toggleWalkstyle", toggleWalkstyle)

@@ -1,11 +1,7 @@
---- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support open source ---
---- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+--- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+--- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
 
------------------------------------------------------------------------------------------------------
--- Shared Emotes Syncing  ---------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------
-
+-- Shared Emotes Syncing  --
 RegisterNetEvent(
     "ServerEmoteRequest",
     function(target, emotename, etype)
@@ -24,7 +20,7 @@ RegisterNetEvent(
             return
         end
 
-        TriggerClientEvent("ClientEmoteRequestReceive", target, emotename, etype)
+        TriggerClientEvent("ClientEmoteRequestReceive", target, emotename, etype, source)
     end
 )
 
@@ -126,9 +122,6 @@ local function addKeybindEventHandlers()
             )
         end
     )
-
-    --  This is my first time doing SQL stuff, and after i finished everything i realized i didnt have to store the keybinds in the database at all.
-    --  But remaking it now is a little pointless since it does it job just fine!
 
     RegisterNetEvent(
         "rp:ServerKeybindCreate",
@@ -385,12 +378,12 @@ local function ExtractEmoteProps(format)
             if propValue and not exportedValues[propValue] then
                 file:write(xt .. propValue .. xt .. c .. "\n")
                 exportedValues[propValue] = true
-            total += 1
+             total += 1
             end
             if secondPropValue and not exportedValues[secondPropValue] then
                 file:write(xt .. secondPropValue .. c .. "\n")
                 exportedValues[secondPropValue] = true
-            total += 1
+             total += 1
             end
         end
     end

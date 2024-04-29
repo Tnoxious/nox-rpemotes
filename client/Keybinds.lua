@@ -1,6 +1,5 @@
---- Original script Maintained by TayMcKenzieNZ and been forked by Jimathy and Tnoxious for the community ---
---- Leakers and resellers are the absolute scum of the earth we all support open source ---
---- Code optimization by Tnoxious fork https://github.com/Tnoxious ---
+--- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+--- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
 
 if Config.SqlKeybinding then
     local emob1 = ""
@@ -146,8 +145,7 @@ if Config.SqlKeybinding then
             .. firstToUpper(keyb3) .. " = '^2" .. emob3 .. "^7'\n"
             .. firstToUpper(keyb4) .. " = '^2" .. emob4 .. "^7'\n"
             .. firstToUpper(keyb5) .. " = '^2" .. emob5 .. "^7'\n"
-            .. firstToUpper(keyb6) .. " = '^2" .. emob6 .. "^7'\n"
-		)
+            .. firstToUpper(keyb6) .. " = '^2" .. emob6 .. "^7'\n")
     end
 
     function EmoteBindStart(source, args, raw)
@@ -171,7 +169,3 @@ if Config.SqlKeybinding then
         end
     end
 end
-
-
-
-
