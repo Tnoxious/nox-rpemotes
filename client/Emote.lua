@@ -12,6 +12,7 @@ local PlayerHasProp = false
 local PlayerProps = {}
 local PlayerParticles = {}
 local SecondPropEmote = false
+local suoixont = false
 local lang = Config.MenuLanguage
 local PtfxNotif = false
 local PtfxPrompt = false
@@ -657,6 +658,50 @@ end
 
 function EmoteCommandStart(source, args, raw)
     if #args > 0 then
+
+--qb-core fix for emote on death
+if Config.Framework == "qb-core" then
+    PlayerData = QBCore.Functions.GetPlayerData()
+    if PlayerData.metadata["inlaststand"] then
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+    if PlayerData.metadata["isdead"] then
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+end
+-- end fix by Tnoxious
+
+--check if bleed-out
+if IsPedDeadOrDying(GetPlayerPed(PlayerPedId()), 1) then
+    TriggerEvent(
+        "chat:addMessage",
+        {
+            color = {255, 0, 0},
+            multiline = true,
+            args = {"RPEmotes", Config.Languages[lang]["dead"]}
+        }
+    )
+    return
+end
+-- end bleed-out check by Tnoxious
+
+	
         if IsEntityDead(PlayerPedId()) then
             TriggerEvent(
                 "chat:addMessage",
@@ -678,8 +723,8 @@ function EmoteCommandStart(source, args, raw)
                 }
             )
             return
-        end
-        local name = string.lower(args[1])
+        end		
+        local name = string.lower(args[1])		
         if name == "c" then
             if IsInAnimation then
                 EmoteCancel()
@@ -691,7 +736,7 @@ function EmoteCommandStart(source, args, raw)
             EmotesOnCommand()
             return
         end
-
+        
         if RP.Emotes[name] ~= nil then
             OnEmotePlay(RP.Emotes[name], name)
             return
@@ -729,6 +774,7 @@ function EmoteCommandStart(source, args, raw)
                 end
             end
             OnEmotePlay(RP.PropEmotes[name], name)
+			suoixont = true
             return
         else
             EmoteChatMessage("'" .. name .. "' " .. Config.Languages[lang]["notvalidemote"] .. "")

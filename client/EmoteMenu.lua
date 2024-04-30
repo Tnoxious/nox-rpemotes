@@ -782,6 +782,35 @@ function AddInfoMenu(menu)
 end
 
 function OpenEmoteMenu()
+
+--qb-core fix for emote on death
+if Config.Framework == "qb-core" then    
+    PlayerData = QBCore.Functions.GetPlayerData()
+    if PlayerData.metadata["inlaststand"] then
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+    if PlayerData.metadata["isdead"] then
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+end
+-- end fix by Tnoxious
+
     if IsEntityDead(PlayerPedId()) then
         -- show in chat
         TriggerEvent(

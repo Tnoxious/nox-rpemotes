@@ -58,6 +58,59 @@ if Config.NewscamEnabled then
 
     -- MAIN FUNCTION
     function UseNewscam()
+	
+--qb-core fix for emote on death
+if Config.Framework == "qb-core" then    
+    PlayerData = QBCore.Functions.GetPlayerData()
+    if PlayerData.metadata["inlaststand"] then
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+    if PlayerData.metadata["isdead"] then
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+end
+    if IsEntityDead(PlayerPedId()) then
+        -- show in chat
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["dead"]}
+            }
+        )
+        return
+    end
+    if (IsPedSwimming(PlayerPedId()) or IsPedSwimmingUnderWater(PlayerPedId())) and not Config.AllowInWater then
+        -- show in chat
+        TriggerEvent(
+            "chat:addMessage",
+            {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"RPEmotes", Config.Languages[lang]["swimming"]}
+            }
+        )
+        return
+    end	
+	-- end fix by Tnoxious	
+	
         if IsPedSittingInAnyVehicle(PlayerPedId()) then
             return
         end

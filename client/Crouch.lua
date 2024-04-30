@@ -7,6 +7,7 @@ local isCrawling = false
 local inAction = false
 local proneType = "onfront"
 local lastKeyPress = 0
+local PassTheKey = false
 
 -- Crouching --
 local function ResetCrouch()
@@ -250,7 +251,6 @@ end
 
 local function Crawl(playerPed, type, direction)
     isCrawling = true
-
     TaskPlayAnim(playerPed, "move_crawl", type .. "_" .. direction, 8.0, -8.0, -1, 2, 0.0, false, false, false)
 
     local time = {
@@ -303,7 +303,6 @@ local function CrawlThread()
             while IsProne do
                 local playerPed = PlayerPedId()
 
-                -- Checks if the player is falling, in vehicle, dead etc.
                 if not CanPlayerCrouchCrawl(playerPed) or IsEntityInWater(playerPed) then
                     ClearPedTasks(playerPed)
                     IsProne = false
@@ -544,7 +543,7 @@ if Config.CrawlEnabled then
     RegisterCommand(
         "crawl",
         function()
-            CrawlKeyPressed()
+            ExecuteCommand("IsPlayerCrawDead") -- check if alive or in water before trigger
         end,
         false
     )
@@ -565,6 +564,74 @@ end
 local function IsPlayerCrawling()
     return isCrawling
 end
+
+RegisterCommand(
+    "IsPlayerCrawDead",
+    function()
+        PassTheKey = true
+        --qb-core fix for emote on death
+        if Config.Framework == "qb-core" then
+            PlayerData = QBCore.Functions.GetPlayerData()
+            if PlayerData.metadata["inlaststand"] then
+                PassTheKey = false
+                TriggerEvent(
+                    "chat:addMessage",
+                    {
+                        color = {255, 0, 0},
+                        multiline = true,
+                        args = {"RPEmotes", Config.Languages[lang]["dead"]}
+                    }
+                )
+                IsProne = false
+                return
+            end
+            if PlayerData.metadata["isdead"] then
+                PassTheKey = false
+                TriggerEvent(
+                    "chat:addMessage",
+                    {
+                        color = {255, 0, 0},
+                        multiline = true,
+                        args = {"RPEmotes", Config.Languages[lang]["dead"]}
+                    }
+                )
+                IsProne = false
+                return
+            end
+        end
+        if IsEntityDead(PlayerPedId()) then
+            PassTheKey = false
+            TriggerEvent(
+                "chat:addMessage",
+                {
+                    color = {255, 0, 0},
+                    multiline = true,
+                    args = {"RPEmotes", Config.Languages[lang]["dead"]}
+                }
+            )
+            IsProne = false
+            return
+        end
+        if (IsPedSwimming(PlayerPedId()) or IsPedSwimmingUnderWater(PlayerPedId())) and not Config.AllowInWater then
+            PassTheKey = false
+            IsProne = false
+            return
+        end
+        -- end fix by Tnoxious
+        if PassTheKey then
+            CrawlKeyPressed()
+        else
+            TriggerEvent(
+                "chat:addMessage",
+                {
+                    color = {255, 0, 0},
+                    multiline = true,
+                    args = {"RPEmotes", "Unable to do that now.."}
+                }
+            )
+        end
+    end
+)
 
 exports("IsPlayerCrouched", IsPlayerCrouched)
 exports("IsPlayerProne", IsPlayerProne)
