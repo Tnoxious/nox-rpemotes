@@ -1,14 +1,18 @@
-# RpEmotes 🏋️
+# ️
 
+NOTE: I have moved from updating this menu with permission to rebrand and rebuild a new menu that will be added to https://github.com/Tnoxious?tab=repositories soon. 
+The last update to this menu will be v1.2.0B, and then it will be archived for access.
+
+#
 This repository serves as my fork of RpEmotes, with fixes and edits done following the privatization of RpEmotes in 2024. This version now has the most up-to-date build as of April 30, 2024, with plans to keep the project active for others to use.
 
 RpEmotes is a community-driven FiveM emote menu allowing players to express themselves in roleplay with custom animations, countless facial expressions, walkstyles, and props, inspired by [DullPear](https://github.com/andristum/dpemotes). RpEmotes was managed by TayMcKenzieNZ and then later forked by jimathy after TayMcKenzieNZ set all his repositories to private and now added them to Tnoxious github to keep the project alive and open source.
 
 Past Repositorys
 - https://github.com/Daudeuf/rpemotes (started here)
-- https://github.com/TayMcKenzieNZ/rpemotes/ (Locked access)
-- https://github.com/MLGCrisis/rpemotes (no updates now)
-- https://github.com/jimathy/rpemotes (missing alot updates)
+- https://github.com/TayMcKenzieNZ/rpemotes/ 
+- https://github.com/MLGCrisis/rpemotes 
+- https://github.com/jimathy/rpemotes 
 
 ![TnoxEmotesBanner](https://github.com/Tnoxious/nox-rpemotes/assets/167952403/df6f88ae-4ae5-4cc1-9f81-25c203575e79)
 

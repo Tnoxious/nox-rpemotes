@@ -1,11 +1,13 @@
---- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
- --- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
+              -- THIS PROJECT IS BEEN MOVED TO A NEW MENU/NAME THAT WILL BE OUT SOON THIS WILL BE LAST UPDATES v1.2.0B ---
+                      -- New menu will be added to https://github.com/Tnoxious?tab=repositories --
+       --- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious and roleplay Community ---      
+--- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
 
 fx_version 'cerulean'
 game 'gta5'
 authors { 'Tnoxious', 'TayMcKenzieNZ', 'MadsL', 'Mathu_lmn', 'MLGCrisis', 'Jimathy', 'Mathu-lmn', 'Daudeuf' }
 description 'RpEmotes is a community driven FiveM emote menu allowing players to express themselves in roleplay universe. This version by Tnoxious keeping the RpEmotes menu alive!'
-version '1.2.0'
+version '1.2.0B'
 lua54 'yes'
 
 dependencies {
