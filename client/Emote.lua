@@ -1,5 +1,8 @@
---- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious, alberttheprince and roleplay Community ---
+              -- THIS PROJECT IS BEEN MOVED TO A NEW MENU/NAME THAT WILL BE OUT SOON THIS WILL BE LAST UPDATES v1.2.0B ---
+                      -- New menu will be added to https://github.com/Tnoxious?tab=repositories --
+       --- RPEmotes maintained by TayMcKenzieNZ, Mathu_lmn, MadsL, MLGCrisis, Jimathy, Tnoxious and roleplay Community ---      
 --- Leakers and resellers are the absolute scum of the earth RPEmotes will always be free!! We above support open source code ---
+
 
 -- You probably shouldnt touch these.
 local AnimationDuration = -1
@@ -687,20 +690,7 @@ if Config.Framework == "qb-core" then
 end
 -- end fix by Tnoxious
 
---check if bleed-out
-if IsPedDeadOrDying(GetPlayerPed(PlayerPedId()), 1) then
-    TriggerEvent(
-        "chat:addMessage",
-        {
-            color = {255, 0, 0},
-            multiline = true,
-            args = {"RPEmotes", Config.Languages[lang]["dead"]}
-        }
-    )
-    return
-end
--- end bleed-out check by Tnoxious
-
+--bleedout check not needed an was causing issue
 	
         if IsEntityDead(PlayerPedId()) then
             TriggerEvent(
